@@ -18,9 +18,16 @@ class AdminController extends Controller
             'password' => ['required'],
         ]);
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->route('admin.login');
+    }
+    public function dashboard(){
+        
+        if(!Auth::guard('admin')->check()){
+              return redirect()->route('admin.login');
+        }
+        return view('admin.dashboard');
     }
 }

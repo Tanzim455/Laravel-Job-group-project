@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +23,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/admindashboard',function(){
-    echo "Admin dashboard";
-})->name('admin.dashboard');
+Route::get('/admindashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
 Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.login');
-Route::post('/adminlogin',[AdminController::class,'login']);
+Route::post('/adminlogin',[AdminController::class,'login'])->name('adminlogin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
