@@ -24,7 +24,8 @@ class User extends Authenticatable
         'phone_number',
         'qualification',
         'years_of_experience',
-        'cv'
+        'cv',
+         'category_id'
     ];
 
     /**
