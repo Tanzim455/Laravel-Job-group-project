@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/admindashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
+Route::get('/admindashboard',[AdminController::class,'dashboard'])->middleware('adminauth')->name('admin.dashboard');
 Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.login');
 Route::post('/adminlogin',[AdminController::class,'login'])->name('adminlogin');
 

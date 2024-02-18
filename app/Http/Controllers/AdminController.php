@@ -25,9 +25,7 @@ class AdminController extends Controller
     }
     public function dashboard(){
         
-        if(!Auth::guard('admin')->check()){
-              return redirect()->route('admin.login');
-        }
+       
         return view('admin.dashboard');
     }
 }
