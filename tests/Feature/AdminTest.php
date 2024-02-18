@@ -3,8 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class AdminTest extends TestCase
@@ -57,11 +59,24 @@ class AdminTest extends TestCase
         
     }
 
-    public function test_guest_user_entering_admin_dahboard_will_be_redirected(){
+    public function test_guest_user_entering_admin_dashboard_will_be_redirected(){
         $this->withoutExceptionHandling();
         $response = $this->get(route('admin.dashboard'));
     
         $response->assertRedirect(route('admin.login'));
+    }
+    public function test_user_with_web_guard_entering_admin_dashboard_will_be_redirected(){
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+
+         $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $response = $this->get(route('admin.dashboard'));
+    
+        $response->assertRedirect(route('admin.login'));
+        
     }
     
 }
