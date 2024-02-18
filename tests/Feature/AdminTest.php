@@ -15,11 +15,7 @@ class AdminTest extends TestCase
      * A basic feature test example.
      */
     use RefreshDatabase;
-    // public function test_there_is_admin_dashboard():void{
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->get('/admindashboard');
-    //     $response->assertOk();
-    // }
+   
     public function test_admins_can_authenticate_using_the_admin_login_screen(): void
     {
         $this->withoutExceptionHandling();
@@ -60,7 +56,7 @@ class AdminTest extends TestCase
     }
 
     public function test_guest_user_entering_admin_dashboard_will_be_redirected(){
-        $this->withoutExceptionHandling();
+        
         $response = $this->get(route('admin.dashboard'));
     
         $response->assertRedirect(route('admin.login'));
