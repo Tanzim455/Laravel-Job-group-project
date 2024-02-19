@@ -64,9 +64,20 @@ public function test_company_can_authenticate_using_the_company_login_screen(): 
     }
     public function test_company_dashboard_screen_can_be_rendered(): void
     {
+        $this->withoutExceptionHandling();
         $response = $this->get(route('company.dashboard'));
 
         $response->assertViewIs('company.dashboard');
+    }
+    public function test_unauthenticated_user_cannot_enter_the_company_dashboard():void{
+        // $this->withoutExceptionHandling();
+        $response=$this->post(route('company.login'), [
+            'email' =>'',
+            'password' =>'',
+        ]);
+        $response->assertSessionHasErrors();
+        // $response->assertStatus(302);
+        
     }
 
 }

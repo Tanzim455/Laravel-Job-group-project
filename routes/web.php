@@ -28,9 +28,11 @@ Route::get('/dashboard', function () {
 Route::get('company/create',[CompanyController::class,'create'])->name('company.create');
 Route::post('company/register',[CompanyController::class,'register'])->name('company.register');
 Route::get('company/login',[CompanyController::class,'loginView'])->name('company.loginview');
-Route::get('company/dashboard',[CompanyController::class,'dashboard'])->name('company.dashboard');
+Route::get('company/dashboard',[CompanyController::class,'dashboard'])
+->middleware('companyredirect')
+->name('company.dashboard');
 Route::post('company/login',[CompanyController::class,'login'])->name('company.login');
-Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->middleware('adminauth')->name('admin.dashboard');
+Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->middleware('adminredirect')->name('admin.dashboard');
 Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.loginview')->middleware('authguardcheck');
 Route::post('/admin/login',[AdminController::class,'login'])->name('admin.login');
 

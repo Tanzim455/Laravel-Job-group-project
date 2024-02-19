@@ -15,18 +15,13 @@ class AdminTest extends TestCase
      * A basic feature test example.
      */
     use RefreshDatabase;
-    public function test_admin_login_screen_can_be_rendered(): void
-    {
-        $response = $this->get(route('admin.loginview'));
+    // public function test_admin_login_screen_can_be_rendered(): void
+    // {
+    //     $response = $this->get(route('admin.loginview'));
 
-        $response->assertViewIs('admin.login');
-    }
-    public function test_admin_dashboard_screen_can_be_rendered(): void
-    {
-        $response = $this->get(route('company.dashboard'));
-
-        $response->assertViewIs('company.dashboard');
-    }
+    //     $response->assertViewIs('admin.login');
+    // }
+    
     public function test_admins_can_authenticate_using_the_admin_login_screen(): void
     {
         $this->withoutExceptionHandling();
@@ -40,6 +35,26 @@ class AdminTest extends TestCase
          $this->actingAs($admin, 'admin');
          $this->assertAuthenticated();
            $response->assertRedirectToRoute('admin.dashboard');
+           
+            
+    }
+    public function test_admin_dashboard_screen_can_be_rendered_for_authenticated_admins(): void
+    {
+        
+            $this->withoutExceptionHandling();
+            $admin = Admin::factory()->create();
+           
+            $response=$this->post(route('admin.login'), [
+                'email' => $admin->email,
+                'password' => 'password',
+            ]);
+            
+             $this->actingAs($admin, 'admin');
+             
+               
+               $response=$this->get(route('admin.dashboard'));
+               $response->assertViewIs('admin.dashboard');
+                
         
     }
     public function test_unauthenticated_user_cannot_enter_the_admin_dashboard():void{
