@@ -25,11 +25,11 @@ class CompanyController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'website'=>$request->url
+            'website'=>$request->website
         ]);
-
-        
-
-        
-    }
+}
+      
+public function login(){
+    return view('company.login');
+}
 }
