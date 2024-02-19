@@ -24,9 +24,9 @@ class CompanyTest extends TestCase
     $this->withoutExceptionHandling();
      $company=Company::factory()->make()->toArray();
      $company['password_confirmation']=$company['password'];
-    dump($company['website']);
-    $response = $this->post(route('company.register'), $company);
     
+    $response = $this->post(route('company.register'), $company);
+    $response->assertOk();
      $this->assertEquals(1,Company::count());
      $this->assertDatabaseHas('companies',[
         'name'=>$company['name'],
@@ -35,7 +35,7 @@ class CompanyTest extends TestCase
          
      ]);
    }
-
+  
    public function test_company_has_a_login_screen()
    {
     $this->withoutExceptionHandling();
