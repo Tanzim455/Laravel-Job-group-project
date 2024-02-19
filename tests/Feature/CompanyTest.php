@@ -39,12 +39,34 @@ class CompanyTest extends TestCase
    public function test_company_has_a_login_screen()
    {
     $this->withoutExceptionHandling();
-    $response = $this->get(route('company.login'));
+    $response = $this->get(route('company.loginview'));
     $response->assertViewIs('company.login');
     $response->assertStatus(200);
       
    }
 
 
+
+public function test_company_can_authenticate_using_the_company_login_screen(): void
+    {
+        $this->withoutExceptionHandling();
+        $company = Company::factory()->create();
+        $this->assertEquals(1,Company::count());
+        $response=$this->post(route('company.login'), [
+            'email' => $company->email,
+            'password' => 'password',
+        ]);
+        
+          $this->actingAs($company, 'company');
+          $this->assertAuthenticated();
+           $response->assertRedirectToRoute('company.dashboard');
+        
+    }
+    public function test_company_dashboard_screen_can_be_rendered(): void
+    {
+        $response = $this->get(route('company.dashboard'));
+
+        $response->assertViewIs('company.dashboard');
+    }
 
 }

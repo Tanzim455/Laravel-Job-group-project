@@ -22,7 +22,7 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.loginview');
     }
     public function dashboard(){
         

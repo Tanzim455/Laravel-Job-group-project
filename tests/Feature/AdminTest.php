@@ -21,6 +21,12 @@ class AdminTest extends TestCase
 
         $response->assertViewIs('admin.login');
     }
+    public function test_admin_dashboard_screen_can_be_rendered(): void
+    {
+        $response = $this->get(route('company.dashboard'));
+
+        $response->assertViewIs('company.dashboard');
+    }
     public function test_admins_can_authenticate_using_the_admin_login_screen(): void
     {
         $this->withoutExceptionHandling();
