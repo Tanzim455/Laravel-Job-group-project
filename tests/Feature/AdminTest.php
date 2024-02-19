@@ -17,7 +17,7 @@ class AdminTest extends TestCase
     use RefreshDatabase;
     public function test_admin_login_screen_can_be_rendered(): void
     {
-        $response = $this->get('admin/login');
+        $response = $this->get(route('admin.loginview'));
 
         $response->assertViewIs('admin.login');
     }
@@ -26,7 +26,7 @@ class AdminTest extends TestCase
         $this->withoutExceptionHandling();
         $admin = Admin::factory()->create();
         $this->assertEquals(1,Admin::count());
-        $response=$this->post(route('adminlogin'), [
+        $response=$this->post(route('admin.login'), [
             'email' => $admin->email,
             'password' => 'password',
         ]);
@@ -38,7 +38,7 @@ class AdminTest extends TestCase
     }
     public function test_unauthenticated_user_cannot_enter_the_admin_dashboard():void{
         // $this->withoutExceptionHandling();
-        $response=$this->post(route('adminlogin'), [
+        $response=$this->post(route('admin.login'), [
             'email' =>'',
             'password' =>'',
         ]);
@@ -51,12 +51,12 @@ class AdminTest extends TestCase
       
         $admin = Admin::factory()->create();
         $this->assertEquals(1,Admin::count());
-        $response=$this->post(route('adminlogin'), [
+        $response=$this->post(route('admin.login'), [
             'email' => $admin->email,
             'password' => 'wrong-password',
         ]);
         // $response->assertStatus(302);
-        $response->assertRedirectToRoute('admin.login');
+        $response->assertRedirectToRoute('admin.loginview');
         
     }
 
@@ -64,7 +64,7 @@ class AdminTest extends TestCase
         
         $response = $this->get(route('admin.dashboard'));
     
-        $response->assertRedirect(route('admin.login'));
+        $response->assertRedirect(route('admin.loginview'));
     }
     public function test_user_with_web_guard_entering_admin_dashboard_will_be_redirected():void{
         
@@ -76,7 +76,7 @@ class AdminTest extends TestCase
         ]);
         $response = $this->get(route('admin.dashboard'));
     
-        $response->assertRedirect(route('admin.login'));
+        $response->assertRedirect(route('admin.loginview'));
         
     }
     

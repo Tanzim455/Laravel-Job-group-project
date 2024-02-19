@@ -26,9 +26,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('company/register',[CompanyController::class,'create']);
-Route::get('/admindashboard',[AdminController::class,'dashboard'])->middleware('adminauth')->name('admin.dashboard');
-Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.login');
-Route::post('/adminlogin',[AdminController::class,'login'])->name('adminlogin');
+Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->middleware('adminauth')->name('admin.dashboard');
+Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.loginview');
+Route::post('/admin/login',[AdminController::class,'login'])->name('admin.login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
