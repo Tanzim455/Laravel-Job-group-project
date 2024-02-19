@@ -39,8 +39,14 @@ public function login(Request $request){
         'email' => ['required', 'email'],
         'password' => ['required'],
     ]);
+    
     if (Auth::guard('company')->attempt($credentials)) {
-        return redirect()->route('company.dashboard');
+         $company=Company::where('email',$credentials['email'])->first();
+          
+        if($company->is_approved){
+            return redirect()->route('company.dashboard');
+        }
+        return redirect()->route('company.loginview');
     }
 
     return redirect()->route('company.loginview');

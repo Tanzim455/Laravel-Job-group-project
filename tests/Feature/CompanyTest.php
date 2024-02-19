@@ -49,10 +49,14 @@ class CompanyTest extends TestCase
 
 
 
-public function test_company_can_authenticate_using_the_company_login_screen(): void
+public function test_company_can_authenticate_using_the_company_login_screen_who_are_approved(): void
     {
         $this->withoutExceptionHandling();
         $company = Company::factory()->create();
+        $company->update([
+          'is_approved'=>true
+        ]);
+        
         $this->assertEquals(1,Company::count());
         $response=$this->post(route('company.login'), [
             'email' => $company->email,
@@ -64,7 +68,25 @@ public function test_company_can_authenticate_using_the_company_login_screen(): 
            $response->assertRedirectToRoute('company.dashboard');
         
     }
-    public function test_company_dashboard_screen_can_be_rendered_for_authenticated_admins(): void
+    public function test_unapproved_companies_cannot_authenticate(): void
+    {
+        $this->withoutExceptionHandling();
+        $company = Company::factory()->create();
+        
+        
+       
+        $response=$this->post(route('company.login'), [
+            'email' => $company->email,
+            'password' => 'password',
+        ]);
+        
+          $this->actingAs($company, 'company');
+          $this->assertAuthenticated();
+           $response->assertRedirectToRoute('company.loginview');
+        
+    }
+
+    public function test_company_dashboard_screen_can_be_rendered_for_authenticated_companies(): void
     {
         
         $this->withoutExceptionHandling();
