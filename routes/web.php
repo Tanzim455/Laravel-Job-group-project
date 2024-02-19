@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
 
 Route::get('company/create',[CompanyController::class,'create'])->name('company.create');
 Route::post('company/register',[CompanyController::class,'register'])->name('company.register');
-Route::get('company/login',[CompanyController::class,'loginView'])->name('company.loginview');
+Route::get('company/login',[CompanyController::class,'loginView'])->name('company.loginview')->middleware('authguardcheck');
 Route::get('company/dashboard',[CompanyController::class,'dashboard'])
 ->middleware('companyredirect')
 ->name('company.dashboard');

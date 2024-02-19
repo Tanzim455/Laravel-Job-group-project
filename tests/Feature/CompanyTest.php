@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -87,5 +89,55 @@ public function test_company_can_authenticate_using_the_company_login_screen(): 
         // $response->assertStatus(302);
         
     }
+    public function test_company_with_wrong_credentials_will_be_redirected_to_company_login_page():void{
+        //$this->withoutExceptionHandling();
+     
+       $admin = Company::factory()->create();
+       $this->assertEquals(1,Company::count());
+       $response=$this->post(route('company.login'), [
+           'email' => $admin->email,
+           'password' => 'wrong-password',
+       ]);
+       // $response->assertStatus(302);
+       $response->assertRedirectToRoute('company.loginview');
+       
+   }
+   public function test_guest_user_entering_company_dashboard_will_be_redirected():void{
+        
+    $response = $this->get(route('company.dashboard'));
+
+    $response->assertRedirectToRoute('company.loginview');
+}
+public function test_user_with_web_guard_entering_company_dashboard_will_be_redirected():void{
+        
+    $user = User::factory()->create();
+
+    $this->actingAs($user, 'web');
+    $response = $this->get(route('company.dashboard'));
+
+    $response->assertRedirectToRoute('company.loginview');
+    
+}
+public function test_user_with_admin_guard_entering_company_dashboard_will_be_redirected():void{
+        
+    $admin = Admin::factory()->create();
+
+    $this->actingAs($admin, 'admin');
+    $response = $this->get(route('company.dashboard'));
+
+    $response->assertRedirectToRoute('company.loginview');
+    
+}
+public function test_authenticated_companies_cannot_visit_company_login_page():void{
+    $this->withoutExceptionHandling();
+    $company = Company::factory()->create();
+
+    $this->actingAs($company, 'company');
+    $response = $this->get(route('company.loginview'));
+    // $response->assertStatus(302);
+     //$response->assertRedirectToRoute('admin.dashboard');
+     $response->assertRedirect();
+    
+}
 
 }
