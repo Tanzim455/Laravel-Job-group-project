@@ -62,12 +62,20 @@ public function test_company_can_authenticate_using_the_company_login_screen(): 
            $response->assertRedirectToRoute('company.dashboard');
         
     }
-    public function test_company_dashboard_screen_can_be_rendered(): void
+    public function test_company_dashboard_screen_can_be_rendered_for_authenticated_admins(): void
     {
+        
         $this->withoutExceptionHandling();
-        $response = $this->get(route('company.dashboard'));
-
-        $response->assertViewIs('company.dashboard');
+        $company = Company::factory()->create();
+        // $this->assertEquals(1,Company::count());
+        $response=$this->post(route('company.login'), [
+            'email' => $company->email,
+            'password' => 'password',
+        ]);
+        
+          $this->actingAs($company, 'company');
+          $response = $this->get(route('company.dashboard'));
+          $response->assertViewIs('company.dashboard');
     }
     public function test_unauthenticated_user_cannot_enter_the_company_dashboard():void{
         // $this->withoutExceptionHandling();
