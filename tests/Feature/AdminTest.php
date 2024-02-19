@@ -64,19 +64,38 @@ class AdminTest extends TestCase
         
         $response = $this->get(route('admin.dashboard'));
     
-        $response->assertRedirect(route('admin.loginview'));
+        $response->assertRedirectToRoute('admin.loginview');
     }
     public function test_user_with_web_guard_entering_admin_dashboard_will_be_redirected():void{
         
         $user = User::factory()->create();
 
-         $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+        $this->actingAs($user, 'web');
         $response = $this->get(route('admin.dashboard'));
     
-        $response->assertRedirect(route('admin.loginview'));
+        $response->assertRedirectToRoute('admin.loginview');
+        
+    }
+    public function test_authenticated_admins_cannot_visit_admin_login_page():void{
+        $this->withoutExceptionHandling();
+        $admin = Admin::factory()->create();
+
+        $this->actingAs($admin, 'admin');
+        $response = $this->get(route('admin.loginview'));
+        $response->assertStatus(302);
+         //$response->assertRedirectToRoute('admin.dashboard');
+         $response->assertRedirect();
+        
+    }
+    public function test_authenticated_users_cannot_visit_admin_login_page():void{
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+
+        $this->actingAs($user, 'web');
+        $response = $this->get(route('admin.loginview'));
+        $response->assertStatus(302);
+         //$response->assertRedirectToRoute('admin.dashboard');
+         $response->assertRedirect();
         
     }
     

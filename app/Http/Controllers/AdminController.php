@@ -9,6 +9,7 @@ class AdminController extends Controller
 {
     //
     public function loginView(){
+       
         return view('admin.login');
     }
 

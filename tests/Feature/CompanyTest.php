@@ -20,11 +20,13 @@ class CompanyTest extends TestCase
     }
    public function test_company_can_register():void
    {
+    
     $response = $this->post('/company/register', [
         'name' => 'Test Company',
         'email' => 'company@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
+         'website'=>'www.company.com'
     ]);
     $this->assertEquals(1,Company::count());
    }
