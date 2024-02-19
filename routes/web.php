@@ -25,7 +25,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('company/register',[CompanyController::class,'create']);
+Route::get('company/create',[CompanyController::class,'create'])->name('company.create');
+Route::post('company/register',[CompanyController::class,'register'])->name('company.register');
 Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->middleware('adminauth')->name('admin.dashboard');
 Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.loginview')->middleware('authguardcheck');
 Route::post('/admin/login',[AdminController::class,'login'])->name('admin.login');

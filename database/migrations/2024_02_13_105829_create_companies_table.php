@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone_number')->unique();
-            $table->string('license_no')->unique();
-            $table->string('registration_paper');
-            $table->string('address');
+            $table->string('phone_number')->unique()->nullable();
+            $table->string('license_no')->unique()->nullable();
+            $table->string('registration_paper')->nullable();
+            $table->string('address')->nullable();
             $table->string('website')->nullable();
             $table->string('linkedin')->nullable();
             $table->boolean('is_approved')->default(false);
