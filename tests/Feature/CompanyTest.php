@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CompanyTest extends TestCase
@@ -85,23 +86,57 @@ public function test_company_can_authenticate_using_the_company_login_screen_who
            $response->assertRedirectToRoute('company.loginview');
         
     }
+    
 
-    public function test_company_dashboard_screen_can_be_rendered_for_authenticated_companies(): void
+    public function test_company_dashboard_screen_can_be_rendered_for_authenticated_companies_who_are_approved(): void
     {
         
         $this->withoutExceptionHandling();
-        $company = Company::factory()->create();
+        $company = Company::factory(
+           [
+            'is_approved'=>true
+           ]
+           
+            
+        )->create();
         // $this->assertEquals(1,Company::count());
+        // dd($company);
         $response=$this->post(route('company.login'), [
             'email' => $company->email,
             'password' => 'password',
         ]);
         
           $this->actingAs($company, 'company');
+        //   dd(Auth()->check('company'));
+        
           $response = $this->get(route('company.dashboard'));
           $response->assertViewIs('company.dashboard');
     }
-    public function test_unauthenticated_user_cannot_enter_the_company_dashboard():void{
+    public function test_company_dashboard_screen_cannot_be_rendered_for_authenticated_companies_who_are_not_approved(): void
+    {
+        
+        $this->withoutExceptionHandling();
+        $company = Company::factory(
+           [
+            'is_approved'=>false
+           ]
+           
+            
+        )->create();
+        // $this->assertEquals(1,Company::count());
+        // dd($company);
+        $response=$this->post(route('company.login'), [
+            'email' => $company->email,
+            'password' => 'password',
+        ]);
+        
+          $this->actingAs($company, 'company');
+        //   dd(Auth()->check('company'));
+        
+          $response = $this->get(route('company.dashboard'));
+          $response->assertRedirectToRoute('company.loginview');
+    }
+    public function test_unauthenticated_companies_cannot_enter_the_company_dashboard():void{
         // $this->withoutExceptionHandling();
         $response=$this->post(route('company.login'), [
             'email' =>'',

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('years_of_experience')->nullable();
             $table->string('cv')->nullable();
             $table->foreignIdFor(Category::class)->nullable();
+            
             $table->rememberToken();
             $table->timestamps();
         });

@@ -89,9 +89,12 @@ class AdminTest extends TestCase
     }
     public function test_user_with_web_guard_entering_admin_dashboard_will_be_redirected():void{
         
-        $user = User::factory()->create();
-
+        $user = User::factory(
+           
+        )->create();
+        
         $this->actingAs($user, 'web');
+        
         $response = $this->get(route('admin.dashboard'));
     
         $response->assertRedirectToRoute('admin.loginview');
@@ -118,6 +121,17 @@ class AdminTest extends TestCase
          //$response->assertRedirectToRoute('admin.dashboard');
          $response->assertRedirect();
         
+    }
+
+   
+    public function test_admins_can_logout(): void
+    {
+        $this->withoutExceptionHandling();
+        $admin = Admin::factory()->create();
+
+        $response=$this->actingAs($admin, 'admin')->post(route('admin.logout'));
+
+        $response->assertRedirectToRoute('admin.loginview');
     }
     
 }
