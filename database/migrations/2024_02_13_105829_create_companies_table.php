@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->string('linkedin')->nullable();
             $table->boolean('is_approved')->default(false);
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

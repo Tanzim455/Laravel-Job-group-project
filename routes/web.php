@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Company\VerifyController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Company\Auth\Register;
@@ -30,6 +31,9 @@ Route::get('company/create',[CompanyController::class,'create'])->name('company.
 
 // Livewire Route
 Route::get('/company/register', Register::class);
+
+// verify company email
+Route::get('company/verify/{token}', [VerifyController::class, 'verifyAccount'])->name('user.verify'); 
 
 Route::post('company/register',[CompanyController::class,'register'])->name('company.register');
 Route::get('company/login',[CompanyController::class,'loginView'])->name('company.loginview')->middleware('authguardcheck');

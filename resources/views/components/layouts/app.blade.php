@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light scroll-smooth group" data-layout="vertical" data-sidebar="dark" data-sidebar-size="lg"
-    data-mode="dark" data-topbar="dark" data-skin="default" data-navbar="sticky" data-content="fluid" dir="ltr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 
@@ -14,15 +13,14 @@
     @livewireStyles
 </head>
 
-<body
-    class="container mx-auto">
+<body class="container mx-auto">
 
     <div class="py-5">
         {{ $slot }}
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    
+
     @livewireScripts
 
 </body>

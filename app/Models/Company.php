@@ -19,6 +19,7 @@ class Company extends Authenticatable
         'address',
         'website',
         'linkedin',
-        'is_approved'
+        'is_approved',
+        'email_verified_at'
     ];
 }

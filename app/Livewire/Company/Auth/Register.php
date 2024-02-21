@@ -2,10 +2,15 @@
 
 namespace App\Livewire\Company\Auth;
 
+use App\Mail\Company\VerificationEmail;
 use App\Models\Company;
-use Livewire\Component;
+use App\Models\CompanyVerify;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Livewire\Component;
 
 class Register extends Component
 {
@@ -16,13 +21,14 @@ class Register extends Component
         return [
 
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['unique:companies','email','required'],
+            'email' => ['unique:companies', 'email', 'required'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-            'website'=>['required','url']
+            'website' => ['required', 'url'],
         ];
     }
 
-    public function resetFields(){
+    public function resetFields()
+    {
         $this->name = '';
         $this->email = '';
         $this->website = '';
@@ -37,18 +43,31 @@ class Register extends Component
 
     public function register()
     {
-        $this->validate(); 
 
-        Company::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'website' => $this->website,
-            'password' => Hash::make($this->password),
-        ]);
+        DB::transaction(function () {
+            $this->validate();
 
-        session()->flash('success','Registration Successful. Please verify email!');
+            $company = Company::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'website' => $this->website,
+                'password' => Hash::make($this->password),
+            ]);
 
-        $this->resetFields();
-        
+            $token = Str::random(64);
+            $id = $company->id;
+
+            CompanyVerify::create([
+                'company_id' => $id,
+                'token' => $token,
+            ]);
+
+            Mail::to($this->email)->send(new VerificationEmail($token));
+
+            session()->flash('success', 'Registration Successful. Please verify email!');
+
+            $this->resetFields();
+        });
+
     }
 }
