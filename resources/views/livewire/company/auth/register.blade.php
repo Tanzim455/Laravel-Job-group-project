@@ -77,7 +77,7 @@
                             {{-- <span wire:loading>Creating...</span> --}}
                         </button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Already have an account? <a href="#"
+                            Already have an account? <a href="{{ route('company.login') }}"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
                                 here</a>
                         </p>

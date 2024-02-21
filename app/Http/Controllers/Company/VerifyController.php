@@ -14,15 +14,15 @@ class VerifyController extends Controller
         $company = $verifyCompany->company;
 
         if ($company->email_verified_at != null) {
-            $message = "Your e-mail is already verified. You can now login.";
+            $message = "Your e-mail is already verified";
             
-            return redirect()->route('company.loginview')->with('message', $message);
+            return redirect()->route('company.login')->with('success', $message);
         }
 
         $verifyCompany->company->email_verified_at = now();
         $verifyCompany->company->save();
-        $message = "Your e-mail is verified. You can now login.";
+        $message = "Your e-mail is verified";
 
-        return redirect()->route('company.loginview')->with('message', $message);
+        return redirect()->route('company.login')->with('success', $message);
     }
 }
