@@ -9,6 +9,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Company\VerifyController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\CandidateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,9 @@ Route::middleware('adminredirect')->group(function () {
 
     Route::get('/admin/approved-companies',[CompanyController::class,'approvedCompanies'])
     ->name('admin.approved.companies');
+
+    Route::get('/admin/all-candidates',[CandidateController::class,'allCandidates'])
+    ->name('admin.all.candidates');
 });
 
 Route::middleware('auth')->group(function () {
