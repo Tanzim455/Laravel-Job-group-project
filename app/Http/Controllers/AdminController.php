@@ -11,7 +11,6 @@ class AdminController extends Controller
     //
     public function loginView()
     {
-
         return view('admin.login');
     }
 
@@ -32,11 +31,6 @@ class AdminController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
-    }
-    public function dashboard()
-    {
-
-        return view('admin.dashboard');
     }
 
     public function logout(Request $request): RedirectResponse

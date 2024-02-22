@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Company\VerifyController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\ProfileController;
 use App\Livewire\Company\Auth\Login;
-use App\Livewire\Company\Auth\Register;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Company\Auth\Register;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Company\VerifyController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,7 @@ Route::post('/admin/login',[AdminController::class,'login'])
 Route::post('/admin/logout',[AdminController::class,'logout'])
 ->name('admin.logout');
 
-Route::get('/admin/dashboard',[AdminController::class,'dashboard'])
+Route::get('/admin/dashboard',[DashboardController::class,'dashboard'])
 ->middleware('adminredirect')
 ->name('admin.dashboard');
 
