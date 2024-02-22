@@ -18,11 +18,12 @@ class DashboardController extends Controller
         $approvedCompanies = Company::where('is_approved', true)->count();
         $unverifiedCompanies = Company::whereNull('email_verified_at')->count();
         $verifiedCompanies = Company::whereNotNull('email_verified_at')->count();
+        $newRegisteredCompanies = Company::latest()->take(10)->get();
 
         return view('admin.dashboard', compact(
             'totalCandidates', 'unverifiedCandidates', 'verifiedCandidates',
             'totalCompanies', 'disApprovedCompanies', 'approvedCompanies', 
-            'unverifiedCompanies', 'verifiedCompanies'
+            'unverifiedCompanies', 'verifiedCompanies', 'newRegisteredCompanies'
         ));
     }
 }
