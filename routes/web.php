@@ -69,6 +69,9 @@ Route::middleware('adminredirect')->group(function () {
 
     Route::put('/admin/verify-company/{company}',[CompanyController::class,'approveCompany'])
     ->name('admin.approve.company');
+
+    Route::get('/admin/approved-companies',[CompanyController::class,'approvedCompanies'])
+    ->name('admin.approved.companies');
 });
 
 Route::middleware('auth')->group(function () {

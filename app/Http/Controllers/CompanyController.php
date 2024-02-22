@@ -77,4 +77,12 @@ class CompanyController extends Controller
 
         return redirect()->back()->with('success', 'Approval Successful');
     }
+
+    public function approvedCompanies()
+    {
+        $approvedCompanies = Company::where('is_approved', true)
+            ->paginate(10);
+
+        return view('admin.approved-company', compact('approvedCompanies'));
+    }
 }
