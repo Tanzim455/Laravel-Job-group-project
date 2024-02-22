@@ -60,9 +60,16 @@ Route::post('/admin/login',[AdminController::class,'login'])
 Route::post('/admin/logout',[AdminController::class,'logout'])
 ->name('admin.logout');
 
-Route::get('/admin/dashboard',[DashboardController::class,'dashboard'])
-->middleware('adminredirect')
-->name('admin.dashboard');
+Route::middleware('adminredirect')->group(function () {
+    Route::get('/admin/dashboard',[DashboardController::class,'dashboard'])
+    ->name('admin.dashboard');
+
+    Route::get('/admin/verified-companies',[CompanyController::class,'verifiedCompanies'])
+    ->name('admin.verified.companies');
+
+    Route::put('/admin/verify-company/{company}',[CompanyController::class,'approveCompany'])
+    ->name('admin.approve.company');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

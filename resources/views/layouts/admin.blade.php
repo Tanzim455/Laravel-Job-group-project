@@ -16,6 +16,7 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind2.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 
