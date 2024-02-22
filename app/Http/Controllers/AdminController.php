@@ -13,20 +13,26 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
         if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('admin.loginview');
+        // return redirect()->route('admin.loginview');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
     public function dashboard(){
-        
-       
+
         return view('admin.dashboard');
     }
 

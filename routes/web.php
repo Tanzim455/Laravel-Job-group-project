@@ -44,12 +44,25 @@ Route::get('company/dashboard',[CompanyController::class,'dashboard'])
 ->middleware('companyredirect')
 ->name('company.dashboard');
 
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/admin/login',[AdminController::class,'loginView'])
+->middleware('authguardcheck')
+->name('admin.loginview');
+
+Route::post('/admin/login',[AdminController::class,'login'])
+->name('admin.login');
+
+Route::post('/admin/logout',[AdminController::class,'logout'])
+->name('admin.logout');
+
 Route::get('/admin/dashboard',[AdminController::class,'dashboard'])
-// ->middleware('adminredirect')
+->middleware('adminredirect')
 ->name('admin.dashboard');
-Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.loginview')->middleware('authguardcheck');
-Route::post('/admin/login',[AdminController::class,'login'])->name('admin.login');
-Route::post('/admin/logout',[AdminController::class,'logout'])->name('admin.logout');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

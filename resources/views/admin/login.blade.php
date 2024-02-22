@@ -88,20 +88,16 @@
                     <p class="text-slate-500 dark:text-zink-200">Sign in to continue to Job Board.</p>
                 </div>
 
-                <form action="https://themesdesign.in/tailwick/html-dark/index.html" class="mt-10" id="signInForm">
-                    @if (session('error'))
-                        <div class="hidden px-4 py-3 mb-3 text-sm text-red-500 border border-red-200 rounded-md bg-red-50 dark:bg-red-400/20 dark:border-red-500/50"
-                            id="errorAlert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                <form method="POST" action="{{ route('admin.login') }}" class="mt-10" id="signInForm">
+                    @csrf
+
                     <div class="mb-3">
                         <label for="email" class="inline-block mb-2 text-base font-medium">Email</label>
                         <input type="email" id="email" name="email"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200 @error('email') border-2 border-red-500 @enderror"
-                            placeholder="Enter email">
+                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            placeholder="Enter email" value="{{ old('email') }}">
                         @error('email')
-                            <div id="email-error" class="hidden mt-1 text-sm text-red-500">{{ $message }}</div>
+                            <div id="email-error" class="mt-1 text-sm text-red-500">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -109,12 +105,15 @@
                         <input type="password" id="password" name="password"
                             class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                             placeholder="Enter password">
+                        @error('password')
+                            <div id="password-error" class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
                             <input id="checkboxDefault1" name="remember"
                                 class="border rounded-sm appearance-none size-4 bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
-                                type="checkbox" value="">
+                                type="checkbox" value="" checked>
                             <label for="checkboxDefault1"
                                 class="inline-block text-base font-medium align-middle cursor-pointer">Remember
                                 me</label>
