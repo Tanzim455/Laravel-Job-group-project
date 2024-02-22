@@ -43,7 +43,10 @@ Route::get('company/verify/{token}', [VerifyController::class, 'verifyAccount'])
 Route::get('company/dashboard',[CompanyController::class,'dashboard'])
 ->middleware('companyredirect')
 ->name('company.dashboard');
-Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->middleware('adminredirect')->name('admin.dashboard');
+
+Route::get('/admin/dashboard',[AdminController::class,'dashboard'])
+// ->middleware('adminredirect')
+->name('admin.dashboard');
 Route::get('/admin/login',[AdminController::class,'loginView'])->name('admin.loginview')->middleware('authguardcheck');
 Route::post('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::post('/admin/logout',[AdminController::class,'logout'])->name('admin.logout');
