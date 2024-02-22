@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class AdminController extends Controller
 {
     //
-    public function loginView(){
-       
+    public function loginView()
+    {
+
         return view('admin.login');
     }
 
@@ -31,15 +33,22 @@ class AdminController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-    public function dashboard(){
+    public function dashboard()
+    {
 
         return view('admin.dashboard');
     }
 
-    public function logout(){
-        if(Auth::guard('admin')->check()) // this means that the admin was logged in.
+    public function logout(Request $request): RedirectResponse
+    {
+        if (Auth::guard('admin')->check()) // this means that the admin was logged in.
         {
             Auth::guard('admin')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+            
             return redirect()->route('admin.loginview');
         }
     }
