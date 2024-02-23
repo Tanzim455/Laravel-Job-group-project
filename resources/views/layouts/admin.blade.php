@@ -324,11 +324,8 @@
     <script src="{{ asset('assets/libs/lucide/umd/lucide.js') }}"></script>
     <script src="{{ asset('assets/js/tailwick.bundle.js') }}"></script>
 
-    <!--apexchart js-->
-    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-
     <!--dashboard ecommerce init js-->
-    <script src="{{ asset('assets/js/pages/dashboards-ecommerce.init.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/pages/dashboards-ecommerce.init.js') }}"></script> --}}
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
