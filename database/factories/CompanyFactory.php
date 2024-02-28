@@ -22,7 +22,9 @@ class CompanyFactory extends Factory
             'name'=>fake()->name(),
              'email'=>fake()->unique()->safeEmail(),
              'password'=>Hash::make('password'),
-             'website'=>fake()->url()
+             'website'=>fake()->url(),
+             'is_approved'=>true,
+             
 
         ];
     }

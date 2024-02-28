@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Authenticatable
 {
     use HasFactory;
-    protected $guard = 'admin';
+    protected $guard = 'company';
     protected $fillable = [
         'name',
         'email',
