@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('job_location_type');
             $table->integer('salary');
             $table->string('apply_url');
-            $table->integer('view-count');
+           
             $table->foreignIdFor(Company::class);
             $table->foreignIdFor(Category::class);
             $table->timestamps();

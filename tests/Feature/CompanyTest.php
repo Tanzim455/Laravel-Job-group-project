@@ -18,7 +18,7 @@ class CompanyTest extends TestCase
     use RefreshDatabase;
     public function test_company_can_register_using_registration_screen(): void
     {
-        $response = $this->get(route('company.create'));
+        $response = $this->get(route('company.register'));
         $response->assertViewIs('company.create');
         $response->assertStatus(200);
     }

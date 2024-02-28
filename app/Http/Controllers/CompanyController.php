@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Company\ApprovalEmail;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 
 class CompanyController extends Controller
@@ -74,7 +76,8 @@ class CompanyController extends Controller
     public function approveCompany(Company $company)
     {
         $company->update(['is_approved' => true]);
-
+        
+        Mail::to($company->email)->send(new ApprovalEmail(company:$company));
         return redirect()->back()->with('success', 'Approval Successful');
     }
 

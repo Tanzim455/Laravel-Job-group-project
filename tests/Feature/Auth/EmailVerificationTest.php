@@ -1,4 +1,4 @@
-<?php
+Compa<?php
 
 namespace Tests\Feature\Auth;
 

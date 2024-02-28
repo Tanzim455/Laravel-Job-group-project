@@ -36,7 +36,7 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'table' => 'jobs',
+            'table' => 'queue_jobs_list',
             'queue' => 'default',
             'retry_after' => 90,
             'after_commit' => false,

@@ -36,11 +36,7 @@ class Register extends Component
         $this->password_confirmation = '';
     }
 
-    public function render()
-    {
-        return view('livewire.company.auth.register');
-    }
-
+ 
     public function register()
     {
 
@@ -70,4 +66,9 @@ class Register extends Component
         });
 
     }
+    public function render()
+    {
+        return view('livewire.company.auth.register');
+    }
+
 }
