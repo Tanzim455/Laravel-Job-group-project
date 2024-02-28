@@ -39,25 +39,25 @@ class CompanyController extends Controller
         return view('company.login');
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
+    //     ]);
 
-        if (Auth::guard('company')->attempt($credentials)) {
-            $company = Company::where('email', $credentials['email'])->first();
+    //     if (Auth::guard('company')->attempt($credentials)) {
+    //         $company = Company::where('email', $credentials['email'])->first();
 
-            if ($company->is_approved) {
-                return redirect()->route('company.dashboard');
-            }
+    //         if ($company->is_approved) {
+    //             return redirect()->route('company.dashboard');
+    //         }
 
-            return redirect()->route('company.loginview');
-        }
+    //         return redirect()->route('company.loginview');
+    //     }
 
-        return redirect()->route('company.loginview');
-    }
+    //     return redirect()->route('company.loginview');
+    // }
 
     public function dashboard()
     {
@@ -87,5 +87,19 @@ class CompanyController extends Controller
             ->paginate(10);
 
         return view('admin.approved-company', compact('approvedCompanies'));
+    }
+
+    public function logout(Request $request)
+    {
+        if (Auth::guard('company')->check()) // this means that the admin was logged in.
+        {
+            Auth::guard('company')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+            
+            return redirect()->route('company.login');
+        }
     }
 }

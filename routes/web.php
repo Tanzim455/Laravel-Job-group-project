@@ -11,6 +11,7 @@ use App\Http\Controllers\Company\VerifyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CandidateController;
 use App\Livewire\Category;
+use App\Livewire\CompanyDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,8 @@ Route::get('/dashboard', function () {
 
 // Livewire Route
 Route::get('/company/register', Register::class)->name('company.register');
- Route::get('/company/login', Login::class)->name('company.login');
-
+ Route::get('/company/login', Login::class)->name('company.login')->middleware('authguardcheck');
+Route::get('/company/logout',[CompanyController::class,'logout'])->name('company.logout');
 
 // verify company email
 Route::get('company/verify/{token}', [VerifyController::class, 'verifyAccount'])->name('user.verify'); 
@@ -44,9 +45,11 @@ Route::get('company/verify/{token}', [VerifyController::class, 'verifyAccount'])
 // Route::get('company/login',[CompanyController::class,'loginView'])->name('company.loginview')->middleware('authguardcheck');
 // Route::post('company/login',[CompanyController::class,'login'])->name('company.login');
 
-Route::get('company/dashboard',[CompanyController::class,'dashboard'])
+Route::get('company/dashboard',CompanyDashboard::class)
 ->middleware('companyredirect')
 ->name('company.dashboard');
+
+
 
 /*
 |--------------------------------------------------------------------------
