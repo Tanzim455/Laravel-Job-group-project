@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Company\VerifyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CandidateController;
+use App\Livewire\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,8 @@ Route::get('/dashboard', function () {
 
 // Livewire Route
 Route::get('/company/register', Register::class)->name('company.register');
-Route::get('/company/login', Login::class)->name('company.login');
+ Route::get('/company/login', Login::class)->name('company.login');
+
 
 // verify company email
 Route::get('company/verify/{token}', [VerifyController::class, 'verifyAccount'])->name('user.verify'); 
@@ -83,5 +85,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('category',Category::class)->name('category')->middleware('adminredirect');
 require __DIR__.'/auth.php';

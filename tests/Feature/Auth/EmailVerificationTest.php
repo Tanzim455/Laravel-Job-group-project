@@ -1,6 +1,5 @@
-Compa<?php
-
-namespace Tests\Feature\Auth;
+<?php
+ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;

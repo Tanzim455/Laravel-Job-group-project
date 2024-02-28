@@ -17,7 +17,7 @@
                             {{ session()->get('success') }}
                         </div>
                     @endif
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    <form class="space-y-4 md:space-y-6" wire:submit="companylogin">
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Company Name</label>
