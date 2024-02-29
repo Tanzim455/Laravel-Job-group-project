@@ -26,7 +26,7 @@ class Login extends Component
                 return redirect()->route('company.dashboard');
             }
 
-            return redirect()->route('company.login');
+             return $this->redirect('company/dashboard', navigate: true);;
         }else{
             dd("Info is wrong");
         }

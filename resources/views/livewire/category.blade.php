@@ -1,3 +1,7 @@
 <div>
-    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
+    <div>
+        @foreach ($categories as $category)
+            {{$category->name}}
+        @endforeach
+    </div>
 </div>

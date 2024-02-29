@@ -1,4 +1,4 @@
 <div>
     @include('livewire.companynav')
-    Hello
+    {{Auth::guard('company')->user()->name }}
 </div>
