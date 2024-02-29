@@ -30,7 +30,7 @@ class Tags extends Component
     }
     public function render()
     {
-        $tags=Tag::select('name')->paginate(10);
+        $tags=Tag::select('id','name')->paginate(10);
         return view('livewire.tags',compact('tags'));
     }
 }

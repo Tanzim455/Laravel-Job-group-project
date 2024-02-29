@@ -34,7 +34,7 @@ class Category extends Component
      }
     public function render()
     {
-        $categories=ModelsCategory::select('name')->paginate(10);
+        $categories=ModelsCategory::select('id','name')->paginate(10);
         return view('livewire.category',compact('categories'));
     }
 }
