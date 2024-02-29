@@ -18,6 +18,9 @@ class Tags extends Component
         Tag::create([
           'name'=>$this->name
         ]);
+        $this->reset();
+
+        session()->flash('success', 'Tags successfully added');
     }
     public function update($id){
         $tag=Tag::find($id);
