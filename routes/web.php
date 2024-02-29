@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CandidateController;
 use App\Livewire\Category;
 use App\Livewire\CompanyDashboard;
+use App\Livewire\CreateJob;
 use App\Livewire\Tags;
 
 /*
@@ -91,4 +92,6 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('category',Category::class)->name('category')->middleware('adminredirect');
 Route::get('tags',Tags::class)->name('tags')->middleware('adminredirect');
+
+Route::get('jobs/create',CreateJob::class)->name('jobs.create');
 require __DIR__.'/auth.php';

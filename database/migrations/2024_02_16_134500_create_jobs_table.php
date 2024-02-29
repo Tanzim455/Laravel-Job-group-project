@@ -16,16 +16,20 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
-            $table->string('experience');
+            $table->longText('description');
             $table->string('qualification');
+            $table->integer('min_experience');
+            $table->integer('max_experience');
+            $table->integer('min_salary');
+            $table->integer('max_salary');
+            $table->string('apply_url')->nullable();
             $table->date('expiration_date');
-            $table->string('job_location_type');
-            $table->integer('salary');
-            $table->string('apply_url');
-           
-            $table->foreignIdFor(Company::class);
-            $table->foreignIdFor(Category::class);
+            $table->string('job_location');
+            $table->enum('job_location_type',['remote', 'onsite', 'hybrid']);
+            $table->foreignId('category_id')->constrained();
+            $table->foreignId('company_id')->constrained();
+            $table->softDeletes();
+          
             $table->timestamps();
         });
     }
