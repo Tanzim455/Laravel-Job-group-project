@@ -93,5 +93,5 @@ Route::middleware('auth')->group(function () {
 Route::get('category',Category::class)->name('category')->middleware('adminredirect');
 Route::get('tags',Tags::class)->name('tags')->middleware('adminredirect');
 
-Route::get('jobs/create',CreateJob::class)->name('jobs.create');
+Route::get('jobs/create',CreateJob::class)->name('jobs.create')->middleware('companyredirect');
 require __DIR__.'/auth.php';
