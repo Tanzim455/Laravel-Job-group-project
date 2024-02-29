@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Job extends Model
 {
@@ -23,4 +24,13 @@ public function tags()
 {
 return $this->belongsToMany(Tag::class)->as('tags');
 }
+protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($job) {
+            // Set the company_id based on the authenticated company user
+            $job->company_id = Auth::guard('company')->user()->id;
+        });
+    }
 }

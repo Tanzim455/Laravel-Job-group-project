@@ -9,6 +9,7 @@ use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -30,6 +31,7 @@ class CreateJobTest extends TestCase
         $category=Category::factory()->create();
         $company=Company::factory()->create();
         
+         Livewire::actingAs($company,'company');
          Job::factory(
             [
                 'category_id'=>$category->id,
@@ -46,9 +48,10 @@ class CreateJobTest extends TestCase
         $response->assertOk();
     }
     public function test_company_can_post_a_job(){
-        
-         
         $company=Company::factory()->create();
+         Livewire::actingAs($company,'company');
+         
+        
         
         $category=Category::factory()->create();
         $job=Job::factory([
@@ -66,8 +69,10 @@ class CreateJobTest extends TestCase
         $this->assertDatabaseHas('jobs',$job);
    }
    public function test_a_job_can_be_posted_by_company_alongside_tags(){
-       
+    $this->withoutExceptionHandling();
     $company=Company::factory()->create();
+    Livewire::actingAs($company,'company');
+    
     Tag::factory(5)->create();
     //  dump($tags);
      $tagsIds=Tag::pluck('id')->sort();
@@ -83,20 +88,23 @@ class CreateJobTest extends TestCase
      ->set($job)
      ->set('tags',[$tagsIds[0],$tagsIds[1],$tagsIds[2]])
      ->call('save');
+     
+   $this->assertEquals(1,Job::count());
    
-    $latestJob=Job::latest()->first();
-   dump($latestJob->id);
+    //  $latestJobId=Job::where('id',1)->first()->pluck('id')[0];
+    $latestJobId=Job::latest()->first()->id;
+     
    
      $this->assertDatabaseHas('job_tag',[
-          'job_id'=>$latestJob->id,
+          'job_id'=>$latestJobId,
            'tag_id'=>$tagsIds[0]
      ]);
      $this->assertDatabaseHas('job_tag',[
-        'job_id'=>$latestJob->id,
+        'job_id'=>$latestJobId,
          'tag_id'=>$tagsIds[1]
    ]);
    $this->assertDatabaseHas('job_tag',[
-    'job_id'=>$latestJob->id,
+    'job_id'=>$latestJobId,
      'tag_id'=>$tagsIds[2]
 ]);
     
@@ -104,7 +112,6 @@ class CreateJobTest extends TestCase
 public function test_category_belongs_to_a_job(){
        
     $this->category_company_job_creation();
-   
    
    $latestJob=Job::latest()->first();
     
