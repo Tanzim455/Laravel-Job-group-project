@@ -8,6 +8,7 @@ use Livewire\Component;
 class Category extends Component
 {
     public $name;
+    
 
     public function savecategory(){
         

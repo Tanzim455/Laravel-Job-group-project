@@ -1,4 +1,7 @@
 <div>
+    @include('livewire.adminnav')
+    
+
     <div class="flex flex-col items-center justify-center">
     <form wire:submit="savecategory" class="max-w-sm mx-auto">
         <div class="mb-5">
