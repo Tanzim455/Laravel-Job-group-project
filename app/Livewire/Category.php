@@ -10,6 +10,7 @@ class Category extends Component
     public $name;
 
     public function savecategory(){
+        
         $this->validate([
              'name'=>'required|min:3|unique:categories'
         ]);
@@ -17,6 +18,9 @@ class Category extends Component
         ModelsCategory::create([
           'name'=>$this->name
         ]);
+        $this->reset();
+
+        session()->flash('success', 'Category successfully added');
     }
     public function update($id){
         $category=ModelsCategory::find($id);
