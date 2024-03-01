@@ -11,7 +11,13 @@
         {{$job->job_location}}
         {{$job->job_location_type}}
     @endforeach --}}
+    @if (session()->has('success'))
+    <div class="text-green-500">
+        {{ session()->get('success') }}
+    </div>
+@endif
     @foreach ($jobs as $job)
+   
     <div class="m-5">
         <div class="group mx-2 mt-10 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
           
@@ -51,11 +57,19 @@
                 @else
                     Inactive
                 @endif
+                <button wire:click="delete({{$job->id}})" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
             </div>
-
+            <div class="mt-5">
+                @if ($job->apply_url)
+               
+                    <a class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" href="{{$job->apply_url}}" target="_blank">Url of link to be applied</a>
+                @endif
+            </div>
+            
           </div>
         </div>
       </div>
+      
       @endforeach
 </div>
 

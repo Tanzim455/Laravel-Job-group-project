@@ -11,8 +11,9 @@ class JobList extends Component
 {
     public Job $job;
     public function delete(Job $job){
-    
+         
         $job->delete();
+        session()->flash('success', 'Job has been deleted successfully');
      }
     public function render()
     {
@@ -24,7 +25,9 @@ class JobList extends Component
         ->get();
 
         $idsOfJobsActive=Job::with('category','tags')
+        
         ->where('company_id',Auth::guard('company')->user()?->id)
+        ->where('deleted_at',NULL)
         ->where('expiration_date','>=',Carbon::now()->format('Y-m-d'))
         ->take(3)
         ->pluck('id')->toArray();
