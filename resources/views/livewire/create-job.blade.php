@@ -97,20 +97,22 @@
 
               
             </select>
+            Categoreis-{{$category_id}}
             @error('category_id')
           <span class="text-red-500">{{ $message }}</span>
          @enderror
               </div> 
               <div class="mb-4">
                 <label for="country" class="block text-sm font-medium text-gray-700">Tags</label>
-                <select wire:model="tags[]"  class="mt-1 p-2 w-48"multiple>
+                <select wire:model="tags"  class="mt-1 p-2 w-48"multiple>
                     @foreach ($allTags as $tag)
                     <option value="{{$tag->id}}">{{$tag->name}}</option> 
                     @endforeach
-    
+                 
                   
                 </select>
                   </div>
+                 
                   <div class="mb-4">
                     <label for="country" class="block text-sm font-medium text-gray-700">Location Type</label>
                     <select wire:model="job_location_type"   class="mt-1 p-2 w-48">

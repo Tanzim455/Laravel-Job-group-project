@@ -36,13 +36,13 @@ class CreateJob extends Component
       public $category_id='';
       
     
-     public $tags=[];
+     public $tags;
     //  public $all_location_type;
     
 
      public function mount(){
         $this->job_location_type=['remote','onsite','hybrid'];
-        $this->tags=[];
+        
         
      }
     public function savejobs(){
@@ -52,12 +52,12 @@ class CreateJob extends Component
             $validated = $this->validate();
             $job = Job::create($validated);
             // Rest of your code
-            dd($this->tags);
+           
                 
-                // if (!empty($this->tags)) {
-                //     dd($this->tags);
+                if (!empty($this->tags)) {
+                    $job->tags()->attach($this->tags);
                     
-                // }
+                }
                 $this->reset();
          session()->flash('success', 'Job has been added successfully');
             }
