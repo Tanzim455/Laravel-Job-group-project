@@ -31,18 +31,18 @@ class CreateJob extends Component
 
       public $job_location='';
 
-      public $job_location_type='';
+      public $job_location_type=[];
 
       public $category_id='';
       
-     public $company_id='';
+    
      public $tags=[];
-     public $all_location_type;
+    //  public $all_location_type;
     
 
      public function mount(){
-        $this->all_location_type=['remote','onsite','hybrid'];
-        $this->company_id=Auth::guard('company')->user()->id;
+        $this->job_location_type=['remote','onsite','hybrid'];
+        
         
      }
     public function savejobs(){
@@ -67,11 +67,12 @@ class CreateJob extends Component
             $validated = $this->validate();
             $job = Job::create($validated);
             // Rest of your code
-            // if (!empty($this->tags)) {
-            //         $job->tags()->attach($this->tags);
-                    
-            //     }
+            
                 $this->reset();
+                if (!empty($this->tags)) {
+                    $job->tags()->attach($this->tags);
+                    
+                }
          session()->flash('success', 'Job has been added successfully');
             }
          catch (\Exception $e) {

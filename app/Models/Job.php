@@ -13,7 +13,7 @@ class Job extends Model
     // protected $table = 'jobs';
     // public static $location_type=['remote','onsite','hybrid'];
     public $fillable=['title','description','min_experience','max_experience','min_salary','max_salary','apply_url',
-    'expiration_date','job_location','job_location_type','category_id','company_id','qualification'
+    'expiration_date','job_location','job_location_type','category_id','qualification','company_id'
 ];
 public function category(){
     return $this->belongsTo(Category::class);
