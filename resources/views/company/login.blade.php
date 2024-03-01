@@ -8,6 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1 class="text-2xl">Dashboard</h1>
+    <h1 class="text-2xl"></h1>
 </body>
 </html>

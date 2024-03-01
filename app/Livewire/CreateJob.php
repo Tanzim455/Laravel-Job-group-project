@@ -6,6 +6,7 @@ use App\Http\Requests\JobPostRequest;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CreateJob extends Component
@@ -36,14 +37,45 @@ class CreateJob extends Component
       
      public $company_id='';
      public $tags=[];
- 
-    public function save(){
-         $validated=$this->validate();
-        
-        $job=Job::create($validated);
+     public $all_location_type;
+    
 
-        if (!empty($this->tags)) {
-            $job->tags()->attach($this->tags);
+     public function mount(){
+        $this->all_location_type=['remote','onsite','hybrid'];
+        $this->company_id=Auth::guard('company')->user()->id;
+        
+     }
+    public function savejobs(){
+        
+        // try {
+        //     $validated = $this->validate();
+        //     $job = Job::create($validated);
+        //     // Rest of your code
+        // } catch (\Exception $e) {
+        //     dd($e->getMessage());
+        // }
+        // $validated=$this->validate();
+        
+        // $job=Job::create($validated);
+        
+        // if (!empty($this->tags)) {
+        //     $job->tags()->attach($this->tags);
+        // }
+        // $this->reset();
+        // session()->flash('success', 'Job has been added successfully');
+        try {
+            $validated = $this->validate();
+            $job = Job::create($validated);
+            // Rest of your code
+            // if (!empty($this->tags)) {
+            //         $job->tags()->attach($this->tags);
+                    
+            //     }
+                $this->reset();
+         session()->flash('success', 'Job has been added successfully');
+            }
+         catch (\Exception $e) {
+            dd($e->getMessage());
         }
     }
     protected function rules(): array
@@ -54,7 +86,9 @@ class CreateJob extends Component
     public function render()
     {   
         $categories=Category::select('id','name')->get();
-        $tags=Tag::select('id','name')->get();
-        return view('livewire.create-job',compact('categories','tags'));
+        $allTags=Tag::all();
+        
+       
+        return view('livewire.create-job',compact('categories','allTags'));
     }
 }

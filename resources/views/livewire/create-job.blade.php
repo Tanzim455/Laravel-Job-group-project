@@ -1,65 +1,129 @@
 <div>
     @include('livewire.companynav')
+    {{-- {{Auth::guard('company')->user() }} --}}
+    {{-- 'title','description','min_experience','max_experience' --}}
     <div class="flex flex-col w-1/2 container mx-auto">
-        <form class="p-6 bg-white rounded-lg shadow-md xl:w-full">
+        @if (session()->has('success'))
+                        <div class="text-green-500">
+                            {{ session()->get('success') }}
+                        </div>
+                    @endif
+        <form wire:submit="savejobs" class="p-6 bg-white rounded-lg shadow-md xl:w-full">
           <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" id="name" class="mt-1 p-2 w-full border rounded-md">
+            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+            <input type="text" wire:model="title" id="name" class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('title')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-            <input type="text" id="email" class="mt-1 p-2 w-full border rounded-md">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="message" wire:model="description" rows="4" class="mt-1 p-2 w-full border rounded-md" placeholder="Write your thoughts here..."></textarea>
           </div>
-      
+          @error('description')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-            <input type="text" id="phone" class="mt-1 p-2 w-full border rounded-md">
+            <label for="min_salary" class="block text-sm font-medium text-gray-700">Min Salary</label>
+            <input type="number" wire:model="min_salary"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('min_salary')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-            <input type="text" id="city" class="mt-1 p-2 w-full border rounded-md">
+            <label for="min_salary" class="block text-sm font-medium text-gray-700">Max Salary</label>
+            <input type="number" wire:model="max_salary"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('max_salary')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-            <input type="text" id="address" class="mt-1 p-2 w-full border rounded-md">
+            <label for="min_experience" class="block text-sm font-medium text-gray-700">Min Experience</label>
+            <input type="number" wire:model="min_experience"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('min_experience')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-            <textarea id="message" rows="4" class="mt-1 p-2 w-full border rounded-md" placeholder="Write your thoughts here..."></textarea>
+            <label for="max_experience" class="block text-sm font-medium text-gray-700">Max Experience</label>
+            <input type="number" wire:model="max_experience"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('max_experience')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
-            <input type="number" id="age" class="mt-1 p-2 w-full border rounded-md">
+            <label for="address" class="block text-sm font-medium text-gray-700">Qualification</label>
+            <input type="text" wire:model="qualification"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('qualification')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-            <input type="number" id="quantity" class="mt-1 p-2 w-full border rounded-md">
+            <label for="apply_url" class="block text-sm font-medium text-gray-700">Apply Url(if applied through link)</label>
+            <input type="text" wire:model="apply_url"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
           <div class="mb-4">
-            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-            <input type="number" id="price" class="mt-1 p-2 w-full border rounded-md">
+            <label for="job_location" class="block text-sm font-medium text-gray-700">Address</label>
+            <input type="text" wire:model="job_location"  class="mt-1 p-2 w-full border rounded-md">
           </div>
-      
+          @error('job_location')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
           <div class="mb-4">
-            <label for="discount" class="block text-sm font-medium text-gray-700">Discount (%)</label>
-            <input type="number" id="discount" class="mt-1 p-2 w-full border rounded-md">
+            <label for="expiration_date" class="block text-sm font-medium text-gray-700">Expiration Date</label>
+            <input type="date" wire:model="expiration_date"  class="mt-1 p-2 w-full border rounded-md">
           </div>
+          @error('expiration_date')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
       
-          <div class="mb-4">
-            <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-            <input type="date" id="date" class="mt-1 p-2 w-full border rounded-md">
-          </div>
+          
+        
+          
       
+          
+      
+          
+      
+          
+          Location type
+        
           <div class="mb-4">
             <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-            <select id="country" class="mt-1 p-2 w">
-</div>
+            <select id="country" wire:model="category_id" class="mt-1 p-2 w">
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option> 
+                @endforeach
+
+              
+            </select>
+            @error('category_id')
+          <span class="text-red-500">{{ $message }}</span>
+         @enderror
+              </div> 
+              <div class="mb-4">
+                <label for="country" class="block text-sm font-medium text-gray-700">Tags</label>
+                <select id="country"  class="mt-1 p-2 w-48"multiple>
+                    @foreach ($allTags as $tag)
+                    <option value="{{$tag->id}}">{{$tag->name}}</option> 
+                    @endforeach
+    
+                  
+                </select>
+                  </div>
+              <div class="mb-4">
+                <label for="job_location_type" class="block text-sm font-medium text-gray-700">Job Location Type</label>
+                <select id="country" wire:model="job_location_type" class="mt-1 p-2 w-48">
+                    @foreach ($all_location_type as $location)
+                    <option value="{{$location}}">{{$location}}</option> 
+                    @endforeach
+                    
+                  
+                </select>
+                  </div>
+                  <input type="text" wire:model="company_id" />
+         <button  class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Submit</button>   
+        </form> 
+        Form ends here 
 </div>
 </div>
