@@ -42,37 +42,23 @@ class CreateJob extends Component
 
      public function mount(){
         $this->job_location_type=['remote','onsite','hybrid'];
-        
+        $this->tags=[];
         
      }
     public function savejobs(){
         
-        // try {
-        //     $validated = $this->validate();
-        //     $job = Job::create($validated);
-        //     // Rest of your code
-        // } catch (\Exception $e) {
-        //     dd($e->getMessage());
-        // }
-        // $validated=$this->validate();
         
-        // $job=Job::create($validated);
-        
-        // if (!empty($this->tags)) {
-        //     $job->tags()->attach($this->tags);
-        // }
-        // $this->reset();
-        // session()->flash('success', 'Job has been added successfully');
         try {
             $validated = $this->validate();
             $job = Job::create($validated);
             // Rest of your code
-            
-                $this->reset();
-                if (!empty($this->tags)) {
-                    $job->tags()->attach($this->tags);
+            dd($this->tags);
+                
+                // if (!empty($this->tags)) {
+                //     dd($this->tags);
                     
-                }
+                // }
+                $this->reset();
          session()->flash('success', 'Job has been added successfully');
             }
          catch (\Exception $e) {

@@ -103,7 +103,7 @@
               </div> 
               <div class="mb-4">
                 <label for="country" class="block text-sm font-medium text-gray-700">Tags</label>
-                <select   class="mt-1 p-2 w-48"multiple>
+                <select wire:model="tags[]"  class="mt-1 p-2 w-48"multiple>
                     @foreach ($allTags as $tag)
                     <option value="{{$tag->id}}">{{$tag->name}}</option> 
                     @endforeach
