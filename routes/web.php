@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Company\VerifyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\JobShowController;
 use App\Livewire\Category;
 use App\Livewire\CompanyDashboard;
 use App\Livewire\CreateJob;
@@ -96,4 +97,5 @@ Route::get('tags',Tags::class)->name('tags')->middleware('adminredirect');
 
 Route::get('jobs/create',CreateJob::class)->name('jobs.create')->middleware('companyredirect');
 Route::get('company/jobs',JobList::class)->name('companyjobs.index')->middleware('companyredirect');
+Route::get('job/{job}',[JobShowController::class,'show'])->name('job.show');
 require __DIR__.'/auth.php';
