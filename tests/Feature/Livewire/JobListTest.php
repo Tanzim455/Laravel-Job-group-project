@@ -68,18 +68,38 @@ class JobListTest extends TestCase
             // 
           $this->job_creation_by_company(times:2);
              
-              $job1=Job::select('id','title','description')->first();
+              $job1=Job::select('id','title','min_experience','max_experience','min_salary','max_salary',
+              'qualification','apply_url','job_location','job_location_type'
+              )->first();
             //find last id
            
-            $job2=Job::select('id','title','description')->orderBy('id','desc')->first();
+            $job2=Job::select('id','title','min_experience','max_experience','min_salary','max_salary',
+            'qualification','apply_url','job_location','job_location_type'
+            )->orderBy('id','desc')->first();
             Livewire::test(JobList::class)
             ->assertSee([
                 'title'=>$job1->title,
-                 'description'=>$job1->description
+                'min_experience'=>$job1->min_experience,
+                'max_experience'=>$job1->max_experience,
+                'min_salary'=>$job1->min_salary,
+                'max_salary'=>$job1->max_salary,
+                'qualification'=>$job1->qualification,
+                
+                'job_location'=>$job1->job_location,
+                'job_location_type'=>$job1->job_location_type
+                 
             ])
             ->assertSee([
                 'title'=>$job2->title,
-                 'description'=>$job2->description
+                'min_experience'=>$job2->min_experience,
+                'max_experience'=>$job2->max_experience,
+                'min_salary'=>$job2->min_salary,
+                'max_salary'=>$job2->max_salary,
+                'qualification'=>$job2->qualification,
+                
+                'job_location'=>$job2->job_location,
+                'job_location_type'=>$job2->job_location_type
+                 
             ])
             ->assertViewHas('jobs')
             
