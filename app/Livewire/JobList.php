@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Job;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -21,8 +22,15 @@ class JobList extends Component
          'qualification','apply_url','job_location','job_location_type','expiration_date','category_id'
          )
         ->get();
+
+        $idsOfJobsActive=Job::with('category','tags')
+        ->where('company_id',Auth::guard('company')->user()?->id)
+        ->where('expiration_date','>=',Carbon::now()->format('Y-m-d'))
+        ->take(3)
+        ->pluck('id')->toArray();
        
-    return view('livewire.job-list',compact('jobs'));
+       
+    return view('livewire.job-list',compact('jobs','idsOfJobsActive'));
         
     }
 }

@@ -41,7 +41,17 @@
           <div class="pl-2"><span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">#{{$tag->name}}</div>
           @endforeach
        </div> 
-
+            <div class="mt-5">
+                
+                
+                @if ($job->id===$idsOfJobsActive[0] || $job->id===$idsOfJobsActive[1] || 
+                $job->id===$idsOfJobsActive[2]
+                )
+                    Active
+                @else
+                    Inactive
+                @endif
+            </div>
 
           </div>
         </div>
