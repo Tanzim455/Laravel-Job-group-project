@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Http\Requests\JobPostRequest;
+use App\Models\Category;
 use App\Models\Job;
+use App\Models\Tag;
 use Livewire\Component;
 
 class CreateJob extends Component
@@ -50,7 +52,9 @@ class CreateJob extends Component
     }
    
     public function render()
-    {
-        return view('livewire.create-job');
+    {   
+        $categories=Category::select('id','name')->get();
+        $tags=Tag::select('id','name')->get();
+        return view('livewire.create-job',compact('categories','tags'));
     }
 }

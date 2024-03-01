@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TagSeeder::class
         ]);
+        $this->call([
+           CompanySeeder::class
+        ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -30,8 +32,8 @@ class JobFactory extends Factory
               'expiration_date'=>Carbon::now()->addDay()->format('Y-m-d'),
                'job_location'=>fake()->address(),
                'job_location_type' => fake()->randomElement (['remote', 'onsite', 'hybrid']),
-                'category_id'=>'',
-                'company_id'=>''
+                'category_id'=>fake()->numberBetween(1,Category::count()),
+                'company_id'=>fake()->numberBetween(1,Company::count())
                
 
         ];
