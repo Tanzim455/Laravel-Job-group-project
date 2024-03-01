@@ -14,6 +14,7 @@ use App\Http\Controllers\JobShowController;
 use App\Livewire\Category;
 use App\Livewire\CompanyDashboard;
 use App\Livewire\CreateJob;
+use App\Livewire\HomePageJobList;
 use App\Livewire\JobList;
 use App\Livewire\Tags;
 
@@ -94,7 +95,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('category',Category::class)->name('category')->middleware('adminredirect');
 Route::get('tags',Tags::class)->name('tags')->middleware('adminredirect');
-
+Route::get('/home',HomePageJobList::class)->name('home');
 Route::get('jobs/create',CreateJob::class)->name('jobs.create')->middleware('companyredirect');
 Route::get('company/jobs',JobList::class)->name('companyjobs.index')->middleware('companyredirect');
 Route::get('job/{job}',[JobShowController::class,'show'])->name('job.show');
