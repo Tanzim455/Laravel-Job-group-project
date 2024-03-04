@@ -27,7 +27,7 @@ class HomePageJobList extends Component
         'j1.job_location_type',
         'companies.name AS company_name',
         'categories.name AS category_name',
-        'tags.name AS tag_name' // Include the tag name
+         // Include the tag name
     )
     ->join('companies', 'companies.id', '=', 'j1.company_id')
     ->join('categories', 'categories.id', '=', 'j1.category_id')
@@ -44,7 +44,7 @@ class HomePageJobList extends Component
     ->get();
 
 
-        dd($jobs);
+        
         
         return view('livewire.home-page-job-list',compact('jobs'));
     }

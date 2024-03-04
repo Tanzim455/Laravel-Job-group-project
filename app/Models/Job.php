@@ -26,6 +26,10 @@ public function tags()
 {
 return $this->belongsToMany(Tag::class);
 }
+public function appliedJobs()
+    {
+        return $this->hasMany(AppliedJob::class);
+    }
 protected static function boot()
     {
         parent::boot();
