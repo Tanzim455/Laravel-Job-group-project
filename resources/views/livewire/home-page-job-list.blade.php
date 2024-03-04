@@ -1,4 +1,12 @@
 <div>
+  @auth
+  @include('homenav')  
+  @endauth
+
+   
+
+
+ 
   @foreach ($jobs as $job)
       <div class="m-5">
           <div class="group mx-2 mt-10 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-6 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto space-y-1">
@@ -16,9 +24,8 @@
                       <div class="pl-2">Expiration date<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->expiration_date }}</span></div>
                   </div>
                   @auth
-                      <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          Apply
-                      </button>
+                  <a class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-32 mt-1 text-center">Apply</a>
+                
                   @else
                       <a href="{{route('login')}}" target="_blank" class="mt-5 text-red-500">Please log in to apply for this job.</a>
                   @endauth
@@ -26,5 +33,6 @@
           </div>
       </div>
   @endforeach
+  
 </div>
 

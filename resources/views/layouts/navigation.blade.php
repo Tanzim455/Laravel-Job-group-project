@@ -9,12 +9,17 @@
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
-
+                
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                </div>
+                <div class="shrink-0 flex items-center">
+                    <a href="{{ route('home') }}" target="_blank" wire:navigate>
+                        Home
+                    </a>
                 </div>
             </div>
 
@@ -39,7 +44,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        {{-- <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
@@ -47,7 +52,13 @@
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
-                        </form>
+                        </form> --}}
+                        <x-dropdown-link >
+                            <a href="{{route('logout')}}" class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page" wire:navigate>Logout</a>
+                        </x-dropdown-link>
+                           
+                         
+                       
                     </x-slot>
                 </x-dropdown>
             </div>
