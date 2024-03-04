@@ -23,12 +23,23 @@
                       <div class="pl-2">Job Location Type<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->job_location_type }}</span></div>
                       <div class="pl-2">Expiration date<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->expiration_date }}</span></div>
                   </div>
-                  @auth
-                  <a class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-32 mt-1 text-center">Apply</a>
+                  @if (auth()->user())
+                  @if (auth()->user()?->appliedJobs->contains('job_id', $job->id))
+                  You have already applied for this job
+              @else 
+              <a 
+                  href="{{ route('job.apply',$job->id)}}"
+                  target="_blank"
+                  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-32 mt-1 text-center" wire:navigate>Apply</a>
+                  @endif
+                  @endif
+                  
                 
-                  @else
-                      <a href="{{route('login')}}" target="_blank" class="mt-5 text-red-500">Please log in to apply for this job.</a>
-                  @endauth
+                     @guest
+                     <a href="{{route('login')}}" target="_blank" class="mt-5 text-red-500">Please log in to apply for this job.</a>   
+                     @endguest
+                      
+                  
               </div>
           </div>
       </div>
