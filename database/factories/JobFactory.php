@@ -33,7 +33,7 @@ class JobFactory extends Factory
                'job_location'=>fake()->address(),
                'job_location_type' => fake()->randomElement (['remote', 'onsite', 'hybrid']),
                 'category_id'=>fake()->numberBetween(1,Category::count()),
-                'company_id'=>fake()->numberBetween(1,Company::count())
+                'company_id'=>fake()->numberBetween(1,2)
                
 
         ];
