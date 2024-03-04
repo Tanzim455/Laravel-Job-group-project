@@ -21,9 +21,9 @@ class JobList extends Component
         ->where('company_id',Auth::guard('company')->user()?->id)
         ->select('id','title','min_experience','max_experience','min_salary','max_salary',
          'qualification','apply_url','job_location','job_location_type','expiration_date','category_id'
-         )
+         )->withCount('appliedJobs')
         ->get();
-
+           
         $idsOfJobsActive=Job::with('category','tags')
         
         ->where('company_id',Auth::guard('company')->user()?->id)
