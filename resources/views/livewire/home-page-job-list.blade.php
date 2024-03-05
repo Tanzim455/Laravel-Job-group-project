@@ -26,7 +26,25 @@
                   @if (auth()->user())
                   @if (auth()->user()?->appliedJobs->contains('job_id', $job->id))
                   You have already applied for this job
-              @else 
+                 
+                      
+                  
+                      
+                  @elseif($job->apply_url)
+                      
+                  <div class="mt-5">
+                    
+                   
+                        <a class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" href="{{$job->apply_url}}" target="_blank">Url of link to be applied</a>
+                   
+                </div>
+                      
+                  
+              
+                  
+              @else
+                  
+              
               <a 
                   href="{{ route('job.apply',$job->id)}}"
                   target="_blank"
