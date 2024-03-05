@@ -10,7 +10,9 @@ class AppliedJob extends Model
 {
     use HasFactory;
     protected $fillable=['job_id','asking_salary','CV','user_id'];
-
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     protected static function boot()
     {
         parent::boot();
@@ -18,7 +20,7 @@ class AppliedJob extends Model
         static::creating(function ($appliedJob) {
             // Set the company_id based on the authenticated company user
             if ($user = Auth::user()) {
-                // Set the company_id based on the authenticated company user
+                // Set the company_id based onwe the authenticated company user
                 $appliedJob->user_id =$user?->id;
             }
         });

@@ -1,16 +1,7 @@
 <div>
     @include('livewire.companynav')
     
-    {{-- {{$job->id}}
-        {{$job->title}}
-        {{$job->min_experience}}
-        {{$job->max_experience}}
-        {{$job->min_salary}}
-        {{$job->max_salary}}
-        {{$job->qualification}}
-        {{$job->job_location}}
-        {{$job->job_location_type}}
-    @endforeach --}}
+ 
     @if (session()->has('success'))
     <div class="text-green-500">
         {{ session()->get('success') }}
@@ -66,7 +57,13 @@
                 @endif
             </div>
             <div class="mt-5">
-              <div>Applied Jobs Count-{{$job->applied_jobs_count}}</div>
+              
+              <a 
+              href="{{route('job.applicants',$job->id)}}"
+               target="_blank"
+                  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-32 mt-1 text-center" wire:navigate
+               
+              >Applied Jobs Count-{{$job->applied_jobs_count}}</a>
           </div>
           </div>
         </div>
