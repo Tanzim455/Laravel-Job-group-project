@@ -1,6 +1,9 @@
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-    
+    @auth
+  @include('homenav')  
+  @endauth
+
     @if (session()->has('success'))
     <div class="text-green-500">
         {{ session()->get('success') }}

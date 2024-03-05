@@ -17,7 +17,7 @@ class JobApplicants extends Component
     {  
         
         $jobApplicants=$this->job;
-        $appliedJobs=AppliedJob::with('user')?->where('job_id',$jobApplicants->id)->get();
+        $appliedJobs=AppliedJob::with('user')?->where('job_id',$jobApplicants->id)->paginate(10);
          
         return view('livewire.job-applicants',compact('appliedJobs'));
     }
