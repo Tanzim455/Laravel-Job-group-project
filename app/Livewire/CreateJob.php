@@ -48,7 +48,7 @@ class CreateJob extends Component
     public function savejobs(){
         
         
-        try {
+      
             $validated = $this->validate();
             $job = Job::create($validated);
             // Rest of your code
@@ -60,10 +60,7 @@ class CreateJob extends Component
                 }
                 $this->reset();
          session()->flash('success', 'Job has been added successfully');
-            }
-         catch (\Exception $e) {
-            dd($e->getMessage());
-        }
+           
     }
     protected function rules(): array
     {

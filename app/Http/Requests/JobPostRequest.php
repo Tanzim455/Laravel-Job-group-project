@@ -24,15 +24,15 @@ class JobPostRequest extends FormRequest
         return [
             //
             'title'=>'required|min:10',
-             'qualification'=>'required|min:3',
-            'description'=>'required|min:100',
-            'min_salary'=>'required|integer',
-            'max_salary'=>'required|integer',
-             'min_experience'=>'required|integer',
-             'max_experience'=>'required|integer',
+             'qualification'=>'required_if:apply_url,null|min:3',
+            'description'=>'required_if:apply_url,null|min:100',
+            'min_salary'=>'required',
+            'max_salary'=>'required',
+             'min_experience'=>'required_if:apply_url,null|integer',
+             'max_experience'=>'required_if:apply_url,null|integer',
              'expiration_date'=>'required|date|after_or_equal:today',
              'apply_url'=>'url',
-             'job_location'=>'required',
+             'job_location'=>'required_if:apply_url,null',
              'job_location_type'=>'required|in:remote,onsite,hybrid',
              'category_id'=>'required|integer',
              
