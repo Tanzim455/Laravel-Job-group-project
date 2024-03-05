@@ -29,7 +29,7 @@ class ApplyJob extends Component
         $path = $file->store('cvs', 'public');
         
         AppliedJob::create([
-                'user_id'=>auth()->user()?->id,
+                
                  'salary'=>$this->asking_salary,
                  'CV'=>$path,
                  'job_id'=>$this->job_id
