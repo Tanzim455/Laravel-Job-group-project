@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('job_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->integer('asking_salary')->nullable();
+            $table->integer('asking_salary');
             $table->string('CV');
             $table->unique(['job_id', 'user_id']);
             $table->timestamps();
