@@ -36,7 +36,10 @@ protected static function boot()
 
         static::creating(function ($job) {
             // Set the company_id based on the authenticated company user
-            $job->company_id = Auth::guard('company')->user()?->id;
+            if ($companyUser = Auth::guard('company')?->user()) {
+                // Set the company_id based on the authenticated company user
+                $job->company_id = $companyUser->id;
+            }
         });
     }
 }
