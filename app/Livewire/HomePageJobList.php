@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class HomePageJobList extends Component
 {
+    public $search_location;
     public function render()
     {
         $jobsIds = DB::table('jobs AS j1')
@@ -28,21 +29,24 @@ class HomePageJobList extends Component
     ) <= 3')
     ->pluck('id')->toArray();
 
-    $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->paginate(10);
     
-       $location_search_ids=Job::where('job_location', 'like', '%'.'Rampura'.'%')->pluck('id')->toArray();
-    //    dd($location_search);
-    //Check if id exists in the filtered ids array 
-    $check_ids=array_intersect($jobsIds,$location_search_ids);
+    
+    if($this->search_location){
+        $location_search_ids=Job::where('job_location', 'like', '%'.$this->search_location.'%')->pluck('id')->toArray();
+        //Check whether search matches to the filtered Ids
+        $check_ids=array_intersect($jobsIds,$location_search_ids);
     if(count($check_ids)){
-        $jobs=Job::where('job_location', 'like', '%'.'Rampura'.'%')->get();
-        dd($jobs);
-    }else{
-        $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->paginate(10);
-        dd($jobs);
+        $jobs=Job::where('job_location', 'like', '%'.$this->search_location.'%')->get();
+        
     }
+    
+}
+    $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->get();
+    
+    
 
         
         return view('livewire.home-page-job-list',compact('jobs'));
-    }
+    
+}
 }
