@@ -36,3 +36,9 @@ npm install npm run dev
 ## 8. Run queues cause we have implemented queue features for company email verification,company approval notification
 
 ```
+php artisan quque:listen
+
+```
+## 9. Use company/login and admin/login routes for loggin in via admin and company
+
+```
