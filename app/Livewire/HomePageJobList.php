@@ -45,6 +45,8 @@ class HomePageJobList extends Component
        
         return view('livewire.home-page-job-list',compact('jobs'));
         
+    }else{
+        $this->addError('search_location','Sorry the current location is not available');
     }
 }
     $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->get();
