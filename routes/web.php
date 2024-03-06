@@ -18,6 +18,7 @@ use App\Livewire\CreateJob;
 use App\Livewire\HomePageJobList;
 use App\Livewire\JobApplicants;
 use App\Livewire\JobList;
+use App\Livewire\SingleJobShow;
 use App\Livewire\Tags;
 
 /*
@@ -101,4 +102,5 @@ Route::get('company/jobs',JobList::class)->name('companyjobs.index')->middleware
 Route::get('job/{job}',[JobShowController::class,'show'])->name('job.show');
 Route::get('job/{job}/apply',ApplyJob::class)->name('job.apply')->middleware('auth');
 Route::get('job/{job}/applicants',JobApplicants::class)->name('job.applicants')->middleware('companyredirect');
+Route::get('job/{job}/details',SingleJobShow::class)->name('job.details');
 require __DIR__.'/auth.php';

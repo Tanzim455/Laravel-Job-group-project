@@ -30,6 +30,9 @@ public function appliedJobs()
     {
         return $this->hasMany(AppliedJob::class);
     }
+public function jobView(){
+    return $this->hasMany(JobView::class);
+}
 protected static function boot()
     {
         parent::boot();
