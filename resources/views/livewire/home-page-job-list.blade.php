@@ -1,7 +1,7 @@
 <div>
-  @auth
+  
   @include('homenav')  
-  @endauth
+  
 
    
 

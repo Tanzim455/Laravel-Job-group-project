@@ -31,9 +31,7 @@ use App\Livewire\Tags;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -97,7 +95,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('category',Category::class)->name('category')->middleware('adminredirect');
 Route::get('tags',Tags::class)->name('tags')->middleware('adminredirect');
-Route::get('/home',HomePageJobList::class)->name('home');
+Route::get('/',HomePageJobList::class)->name('home');
 Route::get('jobs/create',CreateJob::class)->name('jobs.create')->middleware('companyredirect');
 Route::get('company/jobs',JobList::class)->name('companyjobs.index')->middleware('companyredirect');
 Route::get('job/{job}',[JobShowController::class,'show'])->name('job.show');
