@@ -21,8 +21,16 @@
                 <a href="{{route('home')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page" wire:navigate>Home</a>
               </li>
               <li>
+                <a href="{{route('interested.category')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page" wire:navigate>
+                    
+                    Interested Category
+                
+                </a>
+              </li>
+              <li>
                 <a href="{{route('logout')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page" wire:navigate>Logout</a>
               </li>
+              
               @endauth
               @guest
               <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"

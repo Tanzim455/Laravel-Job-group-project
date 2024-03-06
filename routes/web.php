@@ -16,10 +16,12 @@ use App\Livewire\Category;
 use App\Livewire\CompanyDashboard;
 use App\Livewire\CreateJob;
 use App\Livewire\HomePageJobList;
+use App\Livewire\InterestedJobCategory;
 use App\Livewire\JobApplicants;
 use App\Livewire\JobList;
 use App\Livewire\SingleJobShow;
 use App\Livewire\Tags;
+use App\Models\InterestedCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('category',Category::class)->name('category')->middleware('adminredirect');
+
 Route::get('tags',Tags::class)->name('tags')->middleware('adminredirect');
 Route::get('/',HomePageJobList::class)->name('home');
 Route::get('jobs/create',CreateJob::class)->name('jobs.create')->middleware('companyredirect');
@@ -103,4 +106,5 @@ Route::get('job/{job}',[JobShowController::class,'show'])->name('job.show');
 Route::get('job/{job}/apply',ApplyJob::class)->name('job.apply')->middleware('auth');
 Route::get('job/{job}/applicants',JobApplicants::class)->name('job.applicants')->middleware('companyredirect');
 Route::get('job/{job}/details',SingleJobShow::class)->name('job.details');
+Route::get('interested/category',InterestedJobCategory::class)->name('interested.category')->middleware('auth');
 require __DIR__.'/auth.php';
