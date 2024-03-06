@@ -30,7 +30,18 @@ class HomePageJobList extends Component
 
     $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->paginate(10);
     
-        
+       $location_search_ids=Job::where('job_location', 'like', '%'.'Rampura'.'%')->pluck('id')->toArray();
+    //    dd($location_search);
+    //Check if id exists in the filtered ids array 
+    $check_ids=array_intersect($jobsIds,$location_search_ids);
+    if(count($check_ids)){
+        $jobs=Job::where('job_location', 'like', '%'.'Rampura'.'%')->get();
+        dd($jobs);
+    }else{
+        $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->paginate(10);
+        dd($jobs);
+    }
+
         
         return view('livewire.home-page-job-list',compact('jobs'));
     }
