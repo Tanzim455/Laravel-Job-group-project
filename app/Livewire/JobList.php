@@ -22,7 +22,8 @@ class JobList extends Component
         ->select('id','title','min_experience','max_experience','min_salary','max_salary',
          'qualification','apply_url','job_location','job_location_type','expiration_date','category_id'
          )->withCount('appliedJobs')
-        ->get();
+         ->withCount('jobViews')
+        ->paginate(10);
            
         $idsOfJobsActive=Job::with('category','tags')
         
