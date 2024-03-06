@@ -32,14 +32,20 @@ class HomePageJobList extends Component
     
     
     if($this->search_location){
+       
         $location_search_ids=Job::where('job_location', 'like', '%'.$this->search_location.'%')->pluck('id')->toArray();
         //Check whether search matches to the filtered Ids
         $check_ids=array_intersect($jobsIds,$location_search_ids);
+        
     if(count($check_ids)){
-        $jobs=Job::where('job_location', 'like', '%'.$this->search_location.'%')->get();
+        
+        $jobs=Job::where('job_location', 'like', '%'.$this->search_location.'%')
+        ->whereIn('id',$check_ids)
+        ->get();
+       
+        return view('livewire.home-page-job-list',compact('jobs'));
         
     }
-    
 }
     $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->get();
     
@@ -48,5 +54,13 @@ class HomePageJobList extends Component
         
         return view('livewire.home-page-job-list',compact('jobs'));
     
+    
+
+        
+        
+    
 }
+
+    
+    
 }
