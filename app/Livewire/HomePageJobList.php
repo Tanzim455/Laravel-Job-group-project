@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Job;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -10,30 +11,14 @@ class HomePageJobList extends Component
 {
     public function render()
     {
-        $jobs = DB::table('jobs AS j1')
+        $jobsIds = DB::table('jobs AS j1')
     ->select(
-        'j1.company_id',
-        'j1.description',
-        'j1.title',
+        
         'j1.id',
-        'j1.min_experience',
-        'j1.max_experience',
-        'j1.min_salary',
-        'j1.max_salary',
-        'j1.apply_url',
-        'j1.qualification',
+         'j1.company_id',
         'j1.expiration_date',
-        'j1.job_location',
-        'j1.job_location_type',
-        'companies.name AS company_name',
-        'categories.name AS category_name',
-         // Include the tag name
-    )
-    ->join('companies', 'companies.id', '=', 'j1.company_id')
-    ->join('categories', 'categories.id', '=', 'j1.category_id')
-   
-    
-    ->where('j1.expiration_date', '>=', Carbon::now()->format('Y-m-d'))
+       
+    )->where('j1.expiration_date', '>=', Carbon::now()->format('Y-m-d'))
     ->whereRaw('(
         SELECT COUNT(*)
         FROM jobs AS j2
@@ -41,9 +26,10 @@ class HomePageJobList extends Component
         AND j2.expiration_date > NOW()
         AND j2.id <= j1.id
     ) <= 3')
-    ->get();
+    ->pluck('id')->toArray();
 
-
+    $jobs=Job::whereIn('id',$jobsIds)->with('category','company','tags')->paginate(10);
+    
         
         
         return view('livewire.home-page-job-list',compact('jobs'));

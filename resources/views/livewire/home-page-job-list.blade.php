@@ -23,6 +23,16 @@
                       <div class="pl-2">Job Location Type<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->job_location_type }}</span></div>
                       <div class="pl-2">Expiration date<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->expiration_date }}</span></div>
                   </div>
+                  <div class="mt-5 flex   space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 space-x-2">
+                    <div class="pl-2">Company<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->company->name }}</span></div>
+                    <div class="pl-2">Category<span class="ml-2 mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">{{ $job->category->name }}</span></div>
+                    Tags
+                    @foreach ($job->tags as $tag)
+                    <div class="pl-2"><span class="mr-3 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900 cursor-pointer">#{{ $tag->name }}</span></div>
+                    @endforeach
+                  </div>
+                 
+                    
                   @if (auth()->user())
                   @if (auth()->user()?->appliedJobs->contains('job_id', $job->id))
                   You have already applied for this job
