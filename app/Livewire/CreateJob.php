@@ -3,9 +3,12 @@
 namespace App\Livewire;
 
 use App\Http\Requests\JobPostRequest;
+use App\Jobs\InterestedCategoryMailJob;
+use App\Mail\InterestedJobCategoryMail;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -50,16 +53,39 @@ class CreateJob extends Component
         
       
             $validated = $this->validate();
-            $job = Job::create($validated);
+            $latestjob = Job::create($validated);
             // Rest of your code
            
                 
                 if (!empty($this->tags)) {
-                    $job->tags()->attach($this->tags);
+                    $latestjob->tags()->attach($this->tags);
                     
                 }
-                $this->reset();
-         session()->flash('success', 'Job has been added successfully');
+                 $this->reset();
+          session()->flash('success', 'Job has been added successfully');
+
+       
+
+// ...
+
+$users = User::select('users.id', 'users.email')
+    ->whereIn('users.id', function ($query) use ($latestjob) {
+        $query->select('user_id')
+            ->from('user_interested_job_categories')
+            ->where('category_id', $latestjob->category_id);
+    })
+    ->get();
+    if(count($users)){
+        foreach($users as $user){
+             InterestedCategoryMailJob::dispatch(user:$user,jobInstance:$latestjob);
+            
+        }
+        
+    }
+   
+
+// Now you can use the $users collection as needed.
+
            
     }
     protected function rules(): array

@@ -91,13 +91,15 @@
           <div class="mb-4">
             <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
             <select id="country" wire:model="category_id" class="mt-1 p-2 w">
+              <option selected>Select a Category</option>
                 @foreach ($categories as $category)
+                
                 <option value="{{$category->id}}">{{$category->name}}</option> 
                 @endforeach
 
               
             </select>
-            Categoreis-{{$category_id}}
+            
             @error('category_id')
           <span class="text-red-500">{{ $message }}</span>
          @enderror
@@ -115,15 +117,21 @@
                  
                   <div class="mb-4">
                     <label for="country" class="block text-sm font-medium text-gray-700">Location Type</label>
+                    
                     <select wire:model="job_location_type" class="mt-1 p-2 w-48">
-                        @isset($job[0])
-                            <option value="{{ $job[0] }}" selected>{{ $job[0] }}</option>
-                        @endisset
-                        @foreach ($job_location_type as $jobType)
-                            <option value="{{ $jobType }}">{{ $jobType }}</option>
-                        @endforeach
-                    </select>
+                      @if (is_array($job_location_type))
+                          
+                          @foreach ($job_location_type as $jobType)
+                              <option value="{{ $jobType }}">{{ $jobType }}</option>
+                          @endforeach
+                      @else
+                          {{-- Handle the case when $job_location_type is a string --}}
+                          <option value="{{ $job_location_type }}" selected>{{ $job_location_type }}</option>
+                      @endif
+                  </select>
+                  
                 </div>
+                
                 
                   
          <button  class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Submit</button>   
