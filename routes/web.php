@@ -11,6 +11,8 @@ use App\Http\Controllers\Company\VerifyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\JobShowController;
+use App\Livewire\AppliedJob;
+use App\Livewire\AppliedJobsListofUser;
 use App\Livewire\ApplyJob;
 use App\Livewire\Category;
 use App\Livewire\CompanyDashboard;
@@ -107,4 +109,5 @@ Route::get('job/{job}/apply',ApplyJob::class)->name('job.apply')->middleware('au
 Route::get('job/{job}/applicants',JobApplicants::class)->name('job.applicants')->middleware('companyredirect');
 Route::get('job/{job}/details',SingleJobShow::class)->name('job.details');
 Route::get('interested/category',InterestedJobCategory::class)->name('interested.category')->middleware('auth');
+Route::get('applied/jobs',AppliedJobsListofUser::class)->name('applied.jobs')->middleware('auth');
 require __DIR__.'/auth.php';
