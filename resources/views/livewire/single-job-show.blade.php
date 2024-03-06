@@ -29,7 +29,9 @@
             @endif
             @endif
             @guest
-               <a href="{{ route('job.apply',$job->id)}}" target="_blank" class="mt-5 text-red-500">Apply here</a>   
+               <a 
+               
+               href="{{ route('job.apply',$job->id)}}" target="_blank" class="mt-5 text-red-500">Apply here</a>   
                @endguest
                 
 
