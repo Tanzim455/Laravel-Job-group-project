@@ -10,31 +10,39 @@ use Illuminate\Support\Facades\Auth;
 class Job extends Model
 {
     use HasFactory,SoftDeletes;
+
     // protected $table = 'jobs';
     // public static $location_type=['remote','onsite','hybrid'];
-    public $fillable=['title','description','min_experience','max_experience','min_salary','max_salary','apply_url',
-    'expiration_date','job_location','job_location_type','category_id','qualification','company_id'
-];
-public function category(){
-    return $this->belongsTo(Category::class);
-}   
-public function company(){
-return $this->belongsTo(Company::class);
-}
+    public $fillable = ['title', 'description', 'min_experience', 'max_experience', 'min_salary', 'max_salary', 'apply_url',
+        'expiration_date', 'job_location', 'job_location_type', 'category_id', 'qualification', 'company_id',
+    ];
 
-public function tags()
-{
-return $this->belongsToMany(Tag::class);
-}
-public function appliedJobs()
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function appliedJobs()
     {
         return $this->hasMany(AppliedJob::class);
     }
-public function jobViews(){
-    return $this->hasMany(JobView::class);
-}
 
-protected static function boot()
+    public function jobViews()
+    {
+        return $this->hasMany(JobView::class);
+    }
+
+    protected static function boot()
     {
         parent::boot();
 

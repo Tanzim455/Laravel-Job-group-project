@@ -20,8 +20,8 @@ class JobTagFactory extends Factory
     {
         return [
             //
-            'job_id'=>fake()->randomNumber(1,Job::count()),
-             'tag_id'=>fake()->randomNumber(1,Tag::count())
+            'job_id' => fake()->randomNumber(1, Job::count()),
+            'tag_id' => fake()->randomNumber(1, Tag::count()),
         ];
     }
 }

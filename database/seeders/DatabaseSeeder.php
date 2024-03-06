@@ -16,19 +16,19 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
         ]);
         $this->call([
-            CategorySeeder::class
+            CategorySeeder::class,
         ]);
         $this->call([
-            TagSeeder::class
+            TagSeeder::class,
         ]);
         $this->call([
-           CompanySeeder::class
+            CompanySeeder::class,
         ]);
         $this->call([
-            JobSeeder::class
-         ]);
-         $this->call([
-            JobTagSeeder::class
-         ]);
+            JobSeeder::class,
+        ]);
+        $this->call([
+            JobTagSeeder::class,
+        ]);
     }
 }

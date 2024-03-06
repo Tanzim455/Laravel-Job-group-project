@@ -22,7 +22,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact(
             'totalCandidates', 'unverifiedCandidates', 'verifiedCandidates',
-            'totalCompanies', 'disApprovedCompanies', 'approvedCompanies', 
+            'totalCompanies', 'disApprovedCompanies', 'approvedCompanies',
             'unverifiedCompanies', 'verifiedCompanies', 'newRegisteredCompanies'
         ));
     }

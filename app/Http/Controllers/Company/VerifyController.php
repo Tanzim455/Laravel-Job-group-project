@@ -14,14 +14,14 @@ class VerifyController extends Controller
         $company = $verifyCompany->company;
 
         if ($company->email_verified_at != null) {
-            $message = "Your e-mail is already verified. Please wait for admin approval";
-            
+            $message = 'Your e-mail is already verified. Please wait for admin approval';
+
             return redirect()->route('company.login')->with('success', $message);
         }
 
         $verifyCompany->company->email_verified_at = now();
         $verifyCompany->company->save();
-        $message = "Your e-mail has been verified. Please wait for admin approval";
+        $message = 'Your e-mail has been verified. Please wait for admin approval';
 
         return redirect()->route('company.login')->with('success', $message);
     }

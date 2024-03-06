@@ -14,7 +14,15 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    public $name, $email, $website, $password, $password_confirmation;
+    public $name;
+
+    public $email;
+
+    public $website;
+
+    public $password;
+
+    public $password_confirmation;
 
     protected function rules()
     {
@@ -36,7 +44,6 @@ class Register extends Component
         $this->password_confirmation = '';
     }
 
- 
     public function register()
     {
 
@@ -66,9 +73,9 @@ class Register extends Component
         });
 
     }
+
     public function render()
     {
         return view('livewire.company.auth.register');
     }
-
 }

@@ -16,9 +16,10 @@ class AuthGuardCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::guard('admin')?->check() || Auth::guard('web')?->check() || Auth::guard('company')?->check()){
+        if (Auth::guard('admin')?->check() || Auth::guard('web')?->check() || Auth::guard('company')?->check()) {
             return redirect()->back();
         }
+
         return $next($request);
     }
 }

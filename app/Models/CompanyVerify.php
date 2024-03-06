@@ -9,8 +9,8 @@ class CompanyVerify extends Model
 {
     use HasFactory;
 
-    protected $table = "company_verifies";
-  
+    protected $table = 'company_verifies';
+
     /**
      * Write code on Method
      *
@@ -20,7 +20,7 @@ class CompanyVerify extends Model
         'company_id',
         'token',
     ];
-  
+
     /**
      * Write code on Method
      *

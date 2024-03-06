@@ -9,28 +9,35 @@ use Livewire\Component;
 class Tags extends Component
 {
     use RefreshDatabase;
+
     public $name;
-    public function savetags(){
+
+    public function savetags()
+    {
         $this->validate([
-            'name'=>'required|min:3|unique:tags'
+            'name' => 'required|min:3|unique:tags',
         ]);
-        
+
         Tag::create([
-          'name'=>$this->name
+            'name' => $this->name,
         ]);
         $this->reset();
 
         session()->flash('success', 'Tags successfully added');
     }
-    public function update($id){
-        $tag=Tag::find($id);
+
+    public function update($id)
+    {
+        $tag = Tag::find($id);
         $tag->update([
-          'name'=>$this->name
+            'name' => $this->name,
         ]);
     }
+
     public function render()
     {
-        $tags=Tag::select('id','name')->paginate(10);
-        return view('livewire.tags',compact('tags'));
+        $tags = Tag::select('id', 'name')->paginate(10);
+
+        return view('livewire.tags', compact('tags'));
     }
 }

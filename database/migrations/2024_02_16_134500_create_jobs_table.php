@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Category;
-use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,11 +23,11 @@ return new class extends Migration
             $table->string('apply_url')->nullable();
             $table->date('expiration_date');
             $table->string('job_location');
-            $table->enum('job_location_type',['remote', 'onsite', 'hybrid']);
+            $table->enum('job_location_type', ['remote', 'onsite', 'hybrid']);
             $table->foreignId('category_id')->constrained();
             $table->foreignId('company_id')->constrained();
             $table->softDeletes();
-          
+
             $table->timestamps();
         });
     }

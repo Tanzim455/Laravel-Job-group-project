@@ -54,9 +54,9 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-         'adminredirect'=>\App\Http\Middleware\AdminRedirect::class,
-         'companyredirect'=>\App\Http\Middleware\CompanyRedirect::class,
-          'authguardcheck'=>\App\Http\Middleware\AuthGuardCheck::class,
+        'adminredirect' => \App\Http\Middleware\AdminRedirect::class,
+        'companyredirect' => \App\Http\Middleware\CompanyRedirect::class,
+        'authguardcheck' => \App\Http\Middleware\AuthGuardCheck::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

@@ -9,5 +9,5 @@ class JobView extends Model
 {
     use HasFactory;
 
-    protected $fillable=['job_id','user_id'];
+    protected $fillable = ['job_id', 'user_id'];
 }

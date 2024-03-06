@@ -17,6 +17,7 @@ class InterestedCategoryMailJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected User $user;
+
     protected Job $jobInstance;
 
     /**
@@ -33,9 +34,8 @@ class InterestedCategoryMailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        
+
         $email = new InterestedJobCategoryMail(user: $this->user, job: $this->jobInstance);
         Mail::to($this->user['email'])->send($email);
     }
 }
-

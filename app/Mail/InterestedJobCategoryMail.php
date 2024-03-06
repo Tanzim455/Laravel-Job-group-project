@@ -5,7 +5,6 @@ namespace App\Mail;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -19,9 +18,8 @@ class InterestedJobCategoryMail extends Mailable
      * Create a new message instance.
      */
     public function __construct(public User $user,
-    public Job $job
-    )
-    {
+        public Job $job
+    ) {
         //
     }
 

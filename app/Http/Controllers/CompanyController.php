@@ -76,8 +76,9 @@ class CompanyController extends Controller
     public function approveCompany(Company $company)
     {
         $company->update(['is_approved' => true]);
-        
-        Mail::to($company->email)->send(new ApprovalEmail(company:$company));
+
+        Mail::to($company->email)->send(new ApprovalEmail(company: $company));
+
         return redirect()->back()->with('success', 'Approval Successful');
     }
 
@@ -91,14 +92,13 @@ class CompanyController extends Controller
 
     public function logout(Request $request)
     {
-        if (Auth::guard('company')->check()) // this means that the admin was logged in.
-        {
+        if (Auth::guard('company')->check()) { // this means that the admin was logged in.
             Auth::guard('company')->logout();
 
             $request->session()->invalidate();
 
             $request->session()->regenerateToken();
-            
+
             return redirect()->route('company.login');
         }
     }

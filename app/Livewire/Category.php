@@ -8,34 +8,40 @@ use Livewire\Component;
 class Category extends Component
 {
     public $name;
-    
 
-    public function savecategory(){
-        
+    public function savecategory()
+    {
+
         $this->validate([
-             'name'=>'required|min:3|unique:categories'
+            'name' => 'required|min:3|unique:categories',
         ]);
-        
+
         ModelsCategory::create([
-          'name'=>$this->name
+            'name' => $this->name,
         ]);
         $this->reset();
 
         session()->flash('success', 'Category successfully added');
     }
-    public function update($id){
-        $category=ModelsCategory::find($id);
+
+    public function update($id)
+    {
+        $category = ModelsCategory::find($id);
         $category->update([
-          'name'=>$this->name
+            'name' => $this->name,
         ]);
     }
-    public function delete($id){
-    $category=ModelsCategory::findorFail($id);
+
+    public function delete($id)
+    {
+        $category = ModelsCategory::findorFail($id);
         $category->delete();
-     }
+    }
+
     public function render()
     {
-        $categories=ModelsCategory::select('id','name')->paginate(10);
-        return view('livewire.category',compact('categories'));
+        $categories = ModelsCategory::select('id', 'name')->paginate(10);
+
+        return view('livewire.category', compact('categories'));
     }
 }

@@ -19,12 +19,11 @@ class CompanyFactory extends Factory
     {
         return [
             //
-            'name'=>fake()->name(),
-             'email'=>fake()->unique()->safeEmail(),
-             'password'=>Hash::make('password'),
-             'website'=>fake()->url(),
-             'is_approved'=>true,
-             
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'password' => Hash::make('password'),
+            'website' => fake()->url(),
+            'is_approved' => true,
 
         ];
     }

@@ -16,10 +16,10 @@ class CompanyRedirect
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('company')?->check() || !Auth::guard('company')->user()?->is_approved) {
+        if (! Auth::guard('company')?->check() || ! Auth::guard('company')->user()?->is_approved) {
             return redirect()->route('company.login');
         }
-    
+
         return $next($request);
     }
 }

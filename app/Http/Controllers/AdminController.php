@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 
 class AdminController extends Controller
 {
@@ -35,14 +35,13 @@ class AdminController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        if (Auth::guard('admin')->check()) // this means that the admin was logged in.
-        {
+        if (Auth::guard('admin')->check()) { // this means that the admin was logged in.
             Auth::guard('admin')->logout();
 
             $request->session()->invalidate();
 
             $request->session()->regenerateToken();
-            
+
             return redirect()->route('admin.loginview');
         }
     }

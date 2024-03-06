@@ -13,12 +13,11 @@ class JobApplicants extends Component
 
     // }
     public function render()
+    {
 
-    {  
-        
-        $jobApplicants=$this->job;
-        $appliedJobs=AppliedJob::with('user')?->where('job_id',$jobApplicants->id)->paginate(10);
-         
-        return view('livewire.job-applicants',compact('appliedJobs'));
+        $jobApplicants = $this->job;
+        $appliedJobs = AppliedJob::with('user')?->where('job_id', $jobApplicants->id)->paginate(10);
+
+        return view('livewire.job-applicants', compact('appliedJobs'));
     }
 }

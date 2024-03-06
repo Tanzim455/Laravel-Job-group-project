@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'qualification',
         'years_of_experience',
         'cv',
-        'category_id'
+        'category_id',
     ];
 
     /**
@@ -49,6 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function appliedJobs()
     {
         return $this->hasMany(AppliedJob::class);
