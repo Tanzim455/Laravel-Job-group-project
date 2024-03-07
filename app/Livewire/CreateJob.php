@@ -49,7 +49,9 @@ class CreateJob extends Component
     {
 
         $validated = $this->validate();
-        $latestjob = Job::create($validated);
+        try {
+            //code..
+            $latestjob = Job::create($validated);
         // Rest of your code
 
         if (! empty($this->tags)) {
@@ -58,6 +60,11 @@ class CreateJob extends Component
         }
         $this->reset();
         session()->flash('success', 'Job has been added successfully');
+        } catch (\Exception $e) {
+            //throw $th;
+            dd($e->getMessage());
+        }
+        
 
         // ...
 
