@@ -14,7 +14,9 @@
           
           <div class="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
             <h3 class="text-sm text-gray-600"></h3>
-            <a href="#" class="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl">{{$job->title}}</a>
+            
+            <a href="{{route('job.details',$job->id)}}" class="mb-3 overflow-hidden pr-7 
+                text-lg font-semibold sm:text-xl">{{$job->title}}</a>
             
       
             <div class="mt-5 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 space-x-2">

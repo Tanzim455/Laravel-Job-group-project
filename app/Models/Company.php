@@ -24,4 +24,7 @@ class Company extends Authenticatable
         'is_approved',
         'email_verified_at',
     ];
+    public function jobs(){
+        return $this->hasMany(Job::class);
+    }
 }
