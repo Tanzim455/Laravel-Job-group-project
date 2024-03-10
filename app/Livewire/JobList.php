@@ -33,8 +33,8 @@ class JobList extends Component
             ->where('deleted_at', null)
             ->where('expiration_date', '>=', Carbon::now()->format('Y-m-d'))
             ->take(3)
-            ->pluck('id')->toArray();
-
+            ->pluck('id');
+          
         return view('livewire.job-list', compact('jobs', 'idsOfJobsActive'));
 
     }
